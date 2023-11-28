@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "376544988125",
+    "project_id": "yusef-53819",
+    "storage_bucket": "yusef-53819.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:376544988125:android:9587eab6b1009cc2374434",
+        "android_client_info": {
+          "package_name": "com.example.yusefcapstione"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_6Q16hnAE4FEDH5LQ6smeQJpXUnqR0lg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
