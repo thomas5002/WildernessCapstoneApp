@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Profile_Page extends AppCompatActivity {
 
-    private Button LOADUSERBTN;
+    private Button LOADUSERBTN, INC1BTN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +17,7 @@ public class Profile_Page extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         LOADUSERBTN = findViewById(R.id.loadUserBTN);
+        INC1BTN = findViewById(R.id.inc1BTN);
 
         LOADUSERBTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -26,6 +27,13 @@ public class Profile_Page extends AppCompatActivity {
             }
         });
 
+        INC1BTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Profile_Page.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 

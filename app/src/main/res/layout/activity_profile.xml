@@ -9,7 +9,7 @@
         android:id="@+id/loadUserBTN"
         android:layout_width="390dp"
         android:layout_height="79dp"
-        android:text="Load User"
+        android:text="Load Incident"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +36,7 @@
         app:titleTextColor="@color/white"/>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/inc1BTN"
         android:layout_width="388dp"
         android:layout_height="133dp"
         android:text="Incident 1"
