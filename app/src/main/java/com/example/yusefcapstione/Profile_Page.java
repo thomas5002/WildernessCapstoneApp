@@ -11,6 +11,8 @@ public class Profile_Page extends AppCompatActivity {
 
     private Button LOADUSERBTN, INC1BTN;
 
+    public int visC = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,11 +21,23 @@ public class Profile_Page extends AppCompatActivity {
         LOADUSERBTN = findViewById(R.id.loadUserBTN);
         INC1BTN = findViewById(R.id.inc1BTN);
 
+        INC1BTN.setVisibility(View.INVISIBLE);           // starts the incidents button as hidden
+
         LOADUSERBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                visC ++;
                 Intent intent = new Intent(Profile_Page.this, MainActivity.class);
                 startActivity(intent);
+
+                if(visC == 1){
+                    INC1BTN.setVisibility(View.VISIBLE);
+                }
+
+            //    v.setVisibility(View.VISIBLE);
+            //    v.setVisibility(View.INVISIBLE);
+
+
             }
         });
 

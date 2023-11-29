@@ -21,9 +21,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView textView3;
     private DatabaseReference rootDatabaseref;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
