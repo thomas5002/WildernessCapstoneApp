@@ -94,5 +94,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+            // Set toolbar name to user name
+
+      //  TextView tvId = (TextView) findViewById(R.id.toolbar2);
+       // tvId.setText("my name jeff");
+
+
+
+
+
+
     }
 }
