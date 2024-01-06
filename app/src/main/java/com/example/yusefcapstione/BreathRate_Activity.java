@@ -14,7 +14,7 @@ public class BreathRate_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_heart_rate);
+        setContentView(R.layout.activity_breath_rate);
 
         button = findViewById(R.id.backBTN);
         button.setOnClickListener(new View.OnClickListener() {

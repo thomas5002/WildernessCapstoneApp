@@ -6,6 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".HeartRate_Activity">
 
+
+
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar3"
         android:layout_width="409dp"
