@@ -35,6 +35,20 @@
         app:title="Wilderness Safety"
         app:titleTextColor="@color/white"/>
 
+    <!-- EditText for entering the name -->
+    <EditText
+        android:id="@+id/test"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="TESTING NAME FEATURE"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar5" />
+    <!-- End of that added code -->
+
+
     <Button
         android:id="@+id/inc1BTN"
         android:layout_width="388dp"
@@ -47,6 +61,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loadUserBTN"
         app:layout_constraintVertical_bias="0.024" />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
