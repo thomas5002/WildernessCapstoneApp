@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Profile_Page extends AppCompatActivity {
 
-    private Button LOADUSERBTN, INC1BTN;
+    private Button LOADUSERBTN, INC1BTN, INC2BTN, INC3BTN, INC4BTN;
     private EditText editText; // Added line for name change
     public int visC = 0;
 
@@ -24,9 +24,15 @@ public class Profile_Page extends AppCompatActivity {
 
         LOADUSERBTN = findViewById(R.id.loadUserBTN);
         INC1BTN = findViewById(R.id.inc1BTN);
+        INC2BTN = findViewById(R.id.inc2BTN);
+        INC3BTN = findViewById(R.id.inc3BTN);
+        INC4BTN = findViewById(R.id.inc4BTN);
         editText = findViewById(R.id.test); // Added line for name change
 
         INC1BTN.setVisibility(View.INVISIBLE);           // starts the incidents button as hidden
+        INC2BTN.setVisibility(View.INVISIBLE);
+        INC3BTN.setVisibility(View.INVISIBLE);
+        INC4BTN.setVisibility(View.INVISIBLE);
 
         LOADUSERBTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,16 +43,44 @@ public class Profile_Page extends AppCompatActivity {
 
                 if (visC == 1) {
                     INC1BTN.setVisibility(View.VISIBLE);
+                } else if (visC == 2) {
+                    INC2BTN.setVisibility(View.VISIBLE);
+                } else if (visC == 3) {
+                    INC3BTN.setVisibility(View.VISIBLE);
+                } else if (visC == 4) {
+                    INC4BTN.setVisibility(View.VISIBLE);
                 }
 
-                //    v.setVisibility(View.VISIBLE);
                 //    v.setVisibility(View.INVISIBLE);
-
 
             }
         });
 
         INC1BTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Profile_Page.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        INC2BTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Profile_Page.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        INC3BTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Profile_Page.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        INC4BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Profile_Page.this, MainActivity.class);

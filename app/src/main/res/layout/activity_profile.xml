@@ -64,7 +64,44 @@
         app:layout_constraintTop_toBottomOf="@+id/loadUserBTN"
         app:layout_constraintVertical_bias="0.024" />
 
+    <Button
+        android:id="@+id/inc2BTN"
+        android:layout_width="388dp"
+        android:layout_height="133dp"
+        android:text="Incident 2"
+        android:textSize="60sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loadUserBTN"
+        app:layout_constraintVertical_bias="0.475" />
 
+    <Button
+        android:id="@+id/inc3BTN"
+        android:layout_width="388dp"
+        android:layout_height="133dp"
+        android:text="Incident 3"
+        android:textSize="60sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loadUserBTN"
+        app:layout_constraintVertical_bias="0.759" />
+
+    <Button
+        android:id="@+id/inc4BTN"
+        android:layout_width="388dp"
+        android:layout_height="133dp"
+        android:text="Incident 4"
+        android:textSize="60sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loadUserBTN"
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
