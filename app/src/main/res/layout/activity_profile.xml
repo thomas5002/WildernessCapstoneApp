@@ -36,18 +36,20 @@
         app:titleTextColor="@color/white"/>
 
     <!-- EditText for entering the name -->
+    <!-- End of that added code -->
+
+
     <EditText
         android:id="@+id/test"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="TESTING NAME FEATURE"
-
+        android:layout_marginTop="232dp"
+        android:hint="TESTING"
+        android:textSize="60sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar5" />
-    <!-- End of that added code -->
-
 
     <Button
         android:id="@+id/inc1BTN"
