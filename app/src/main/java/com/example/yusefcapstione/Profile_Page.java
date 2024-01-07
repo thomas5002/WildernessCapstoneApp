@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Profile_Page extends AppCompatActivity {
 
-    private Button LOADUSERBTN, INC1BTN, INC2BTN, INC3BTN, INC4BTN;
+    private Button LOADUSERBTN, INC1BTN, INC2BTN, INC3BTN, INC4BTN, DEL1BTN, DEL2BTN, DEL3BTN, DEL4BTN;
     private EditText editText; // Added line for name change
     public int visC = 0;
 
@@ -27,12 +27,22 @@ public class Profile_Page extends AppCompatActivity {
         INC2BTN = findViewById(R.id.inc2BTN);
         INC3BTN = findViewById(R.id.inc3BTN);
         INC4BTN = findViewById(R.id.inc4BTN);
+        DEL1BTN = findViewById(R.id.del1BTN);
+        DEL2BTN = findViewById(R.id.del2BTN);
+        DEL3BTN = findViewById(R.id.del3BTN);
+        DEL4BTN = findViewById(R.id.del4BTN);
+
         editText = findViewById(R.id.test); // Added line for name change
 
         INC1BTN.setVisibility(View.INVISIBLE);           // starts the incidents button as hidden
         INC2BTN.setVisibility(View.INVISIBLE);
         INC3BTN.setVisibility(View.INVISIBLE);
         INC4BTN.setVisibility(View.INVISIBLE);
+        DEL1BTN.setVisibility(View.INVISIBLE);
+        DEL2BTN.setVisibility(View.INVISIBLE);
+        DEL3BTN.setVisibility(View.INVISIBLE);
+        DEL4BTN.setVisibility(View.INVISIBLE);
+
 
         LOADUSERBTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,14 +51,18 @@ public class Profile_Page extends AppCompatActivity {
                 Intent intent = new Intent(Profile_Page.this, MainActivity.class);
                 startActivity(intent);
 
-                if (visC == 1) {
+                if (!INC1BTN.isShown()) {
                     INC1BTN.setVisibility(View.VISIBLE);
-                } else if (visC == 2) {
+                    DEL1BTN.setVisibility(View.VISIBLE);
+                } else if (!INC2BTN.isShown()) {
                     INC2BTN.setVisibility(View.VISIBLE);
-                } else if (visC == 3) {
+                    DEL2BTN.setVisibility(View.VISIBLE);
+                } else if (!INC3BTN.isShown()) {
                     INC3BTN.setVisibility(View.VISIBLE);
-                } else if (visC == 4) {
+                    DEL3BTN.setVisibility(View.VISIBLE);
+                } else if (!INC4BTN.isShown()) {
                     INC4BTN.setVisibility(View.VISIBLE);
+                    DEL4BTN.setVisibility(View.VISIBLE);
                 }
 
                 //    v.setVisibility(View.INVISIBLE);
@@ -64,11 +78,29 @@ public class Profile_Page extends AppCompatActivity {
             }
         });
 
+        DEL1BTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                visC--;
+                INC1BTN.setVisibility(View.INVISIBLE);
+                DEL1BTN.setVisibility(View.INVISIBLE);
+            }
+        });
+
         INC2BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Profile_Page.this, MainActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        DEL2BTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                visC--;
+                INC2BTN.setVisibility(View.INVISIBLE);
+                DEL2BTN.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -80,11 +112,29 @@ public class Profile_Page extends AppCompatActivity {
             }
         });
 
+        DEL3BTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                visC--;
+                INC3BTN.setVisibility(View.INVISIBLE);
+                DEL3BTN.setVisibility(View.INVISIBLE);
+            }
+        });
+
         INC4BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Profile_Page.this, MainActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        DEL4BTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                visC--;
+                INC4BTN.setVisibility(View.INVISIBLE);
+                DEL4BTN.setVisibility(View.INVISIBLE);
             }
         });
 
