@@ -19,7 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
-    private Button HRBTN , BRBTN, GRAPHBTN, SETTINGSBTN, btn, btnRead;
+    private Button HRBTN , BRBTN, GRAPHBTN, SETTINGSBTN, CAMERABTN, btn, btnRead;
     private EditText test;
     private TextView textView3;
     private DatabaseReference rootDatabaseref;
@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         BRBTN = findViewById(R.id.brBTN);
         GRAPHBTN = findViewById(R.id.GraphBTN);
         SETTINGSBTN = findViewById(R.id.SettingBTN);
+        CAMERABTN = findViewById(R.id.CameraBTN);
 
         HRBTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,6 +106,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Settings_Activity.class);
+                startActivity(intent);
+            }
+        });
+
+        CAMERABTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Camera_Activity.class);
                 startActivity(intent);
             }
         });
