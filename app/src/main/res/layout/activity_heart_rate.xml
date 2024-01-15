@@ -7,6 +7,34 @@
     tools:context=".HeartRate_Activity">
 
 
+    <TextView
+        android:id="@+id/heartRateInstruction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:text="Place finger on Camera"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.354" />
+
+    <Button
+        android:id="@+id/heartRateButton"
+        android:layout_width="294dp"
+        android:layout_height="57dp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:width="300dp"
+        android:text="MEASURE HEART RATE"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.534"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.431"
+        tools:ignore="MissingConstraints" />
 
 
     <androidx.appcompat.widget.Toolbar
@@ -14,26 +42,27 @@
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:background="@color/blue"
-        app:title="Heart Rate"
-        app:titleTextColor="@color/white"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="1dp"
-        tools:ignore="MissingConstraints" />
+        app:title="Heart Rate"
+        app:titleTextColor="@color/white"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="1dp" />
 
     <Button
         android:id="@+id/backBTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="BackButton"
         android:backgroundTint="@color/blue"
+        android:text="BackButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.898" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
