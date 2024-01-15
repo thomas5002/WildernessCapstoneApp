@@ -52,7 +52,7 @@ import android.widget.Button;
 public class HeartRate_Activity extends AppCompatActivity {
     private Button button;
 
-    @Override
+   /* @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_heart_rate);
@@ -70,10 +70,10 @@ public class HeartRate_Activity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
-    }
+    } */
 
 
-public class HeartRateCalculator extends AppCompatActivity {
+
     private static final int VIDEO_CAPTURE = 101;
     private static final int RATE = 26;
     String filePath;
@@ -93,7 +93,7 @@ public class HeartRateCalculator extends AppCompatActivity {
     int total_time = 0;
     int index = 0;
     TextView logger;
-   // Database database;
+   DatabaseTest database;
     private  String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -124,7 +124,7 @@ public class HeartRateCalculator extends AppCompatActivity {
         });
 
     }
-/*
+
     private void exportDB() {
         File file = new File("/storage/self/primary/Download/covid_sym_db.csv");
 
@@ -143,7 +143,7 @@ public class HeartRateCalculator extends AppCompatActivity {
             Log.e("MainActivity", sqlEx.getMessage(), sqlEx);
         }
     }
-*/
+
 
     private boolean isCameraPermitted() {
         if (getPackageManager().hasSystemFeature(
@@ -304,6 +304,7 @@ public class HeartRateCalculator extends AppCompatActivity {
             return null;
         }
     }
-}}
+
+}
 
 

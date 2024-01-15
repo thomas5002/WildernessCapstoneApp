@@ -30,11 +30,11 @@ import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.Locale;
 
-public class BreathRate_Activity extends AppCompatActivity  {
+public class BreathRate_Activity extends AppCompatActivity implements SensorEventListener  {
 
     private Button button;
 
-    @Override
+   /* @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_breath_rate);
@@ -47,14 +47,13 @@ public class BreathRate_Activity extends AppCompatActivity  {
                 startActivity(intent);
             }
         });
-    }
+    } */
 
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
-    public class HeartRateCalculator extends AppCompatActivity implements SensorEventListener {
 
 
         private double heartRate = 0;
@@ -72,6 +71,7 @@ public class BreathRate_Activity extends AppCompatActivity  {
         long time2;
         int total_time = 0;
         int index = 0;
+        private DatabaseTest database;
 
         //Database database;
 
@@ -86,12 +86,12 @@ public class BreathRate_Activity extends AppCompatActivity  {
             Button measureRespiratoryButton = (Button) findViewById(R.id.respRateButton);
 
 
-            // database = new Database(this);
+            database = new DatabaseTest(this);
 
             Intent intent = getIntent();
             String symptomsString = (String) intent.getStringExtra("SYMPTOMS");
 
-            //getSymptoms(symptomsString);
+           getSymptoms(symptomsString);
 
 
             measureRespiratoryButton.setOnClickListener(new View.OnClickListener() {
@@ -104,7 +104,7 @@ public class BreathRate_Activity extends AppCompatActivity  {
 
         }
 
-  /*  private void exportDB() {
+   private void exportDB() {
         File file = new File("/storage/self/primary/Download/covid_sym_db.csv");
 
         try {
@@ -123,9 +123,9 @@ public class BreathRate_Activity extends AppCompatActivity  {
         catch(Exception sqlEx) {
             Log.e("MainActivity", sqlEx.getMessage(), sqlEx);
         }
-    } */
+    }
 
-  /*  private void getSymptoms(String symptomsString) {
+    private void getSymptoms(String symptomsString) {
         if(symptomsString != null){
             symptomsString = symptomsString.substring(1);
             symptomsString = symptomsString.substring(0, symptomsString.length() - 1);
@@ -144,7 +144,7 @@ public class BreathRate_Activity extends AppCompatActivity  {
             }
 
         }
-    } */
+    }
 
 
         void configurePermissions() {
@@ -161,7 +161,7 @@ public class BreathRate_Activity extends AppCompatActivity  {
             ((TextView) findViewById(R.id.respInstruction)).setText("Calculating...");
             accelManage = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
             senseAccel = accelManage.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-            accelManage.registerListener(HeartRateCalculator.this, senseAccel, SensorManager.SENSOR_DELAY_NORMAL);
+            accelManage.registerListener(BreathRate_Activity.this, senseAccel, SensorManager.SENSOR_DELAY_NORMAL);
         }
 
 
@@ -224,4 +224,3 @@ public class BreathRate_Activity extends AppCompatActivity  {
 
         }
     }
-}

@@ -28,10 +28,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        test = findViewById(R.id.test);
+     /*   test = findViewById(R.id.test);
         btn = findViewById(R.id.btn);
         btnRead = findViewById(R.id.btnRead);
-        textView3 = findViewById(R.id.textView3);
+        textView3 = findViewById(R.id.textView3); */
 
         rootDatabaseref = FirebaseDatabase.getInstance().getReference().child("Users");
 
