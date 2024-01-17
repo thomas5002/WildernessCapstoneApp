@@ -32,7 +32,7 @@ public class Profile_Page extends AppCompatActivity {
         DEL3BTN = findViewById(R.id.del3BTN);
         DEL4BTN = findViewById(R.id.del4BTN);
 
-        editText = findViewById(R.id.test); // Added line for name change
+//        editText = findViewById(R.id.test); // Added line for name change
 
         INC1BTN.setVisibility(View.INVISIBLE);           // starts the incidents button as hidden
         INC2BTN.setVisibility(View.INVISIBLE);
