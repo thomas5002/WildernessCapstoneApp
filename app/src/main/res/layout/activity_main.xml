@@ -24,75 +24,78 @@
 
     <Button
         android:id="@+id/hrBTN"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/blue"
-        android:text="HR"
+        android:layout_width="380dp"
+        android:layout_height="120dp"
+        android:background="@drawable/round_button"
+        android:textSize="40sp"
+        android:text="HEARTBEAT"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.998" />
+        app:layout_constraintVertical_bias="0.232" />
 
     <Button
         android:id="@+id/brBTN"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/blue"
-        android:text="BR"
+        android:layout_width="380dp"
+        android:layout_height="120dp"
+        android:background="@drawable/round_button"
+        android:textSize="40sp"
+        android:text="BREATHRATE"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.35"
+        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.998" />
+        app:layout_constraintVertical_bias="0.448" />
 
     <Button
         android:id="@+id/GraphBTN"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/blue"
+        android:layout_width="380dp"
+        android:layout_height="120dp"
+        android:background="@drawable/round_button"
         android:text="Graph"
         android:textColor="@android:color/white"
+        android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.65"
+        app:layout_constraintHorizontal_bias="0.548"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.998" />
+        app:layout_constraintVertical_bias="0.88" />
 
     <Button
         android:id="@+id/SettingBTN"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/blue"
+        android:layout_width="380dp"
+        android:layout_height="60dp"
+        android:background="@drawable/round_button"
+        android:textSize="25sp"
         android:text="Settings"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintHorizontal_bias="0.548"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.005" />
+        app:layout_constraintVertical_bias="0.104" />
+
 
     <Button
         android:id="@+id/CameraBTN"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/blue"
+        android:layout_width="380dp"
+        android:layout_height="120dp"
+        android:background="@drawable/round_button"
+        android:textSize="40sp"
         android:text="Camera"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.998" />
-
-
+        app:layout_constraintVertical_bias="0.664" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
@@ -103,8 +106,8 @@
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:title="Home Page"
+        app:layout_constraintVertical_bias="0.004"
+        app:title="Main Menu"
         app:titleTextColor="@color/white"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="1dp" />
