@@ -139,25 +139,25 @@ public class Profile_Page extends AppCompatActivity {
         });
 
         // Added block for name change - Start
-        editText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // This method is called before the text is changed
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // This method is called when the text is being changed
-                String enteredText = s.toString();
-                // Modify the button's text based on the entered text
-                INC1BTN.setText(enteredText);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                // This method is called after the text has changed
-            }
-        });
+//        editText.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//                // This method is called before the text is changed
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                // This method is called when the text is being changed
+//                String enteredText = s.toString();
+//                // Modify the button's text based on the entered text
+//                INC1BTN.setText(enteredText);
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                // This method is called after the text has changed
+//            }
+//        });
         // Added block - End
 
     }
