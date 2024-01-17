@@ -9,8 +9,8 @@
         android:id="@+id/loadUserBTN"
         android:layout_width="390dp"
         android:layout_height="79dp"
-        android:text="Load Incident"
         android:background="@drawable/round_button"
+        android:text="Load Incident"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,23 +34,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:title="Wilderness Safety"
-        app:titleTextColor="@color/white"/>
+        app:titleTextColor="@color/white" />
 
     <!-- EditText for entering the name -->
     <!-- End of that added code -->
 
 
-<!--    <EditText-->
-<!--        android:id="@+id/test"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="232dp"-->
-<!--        android:hint="TESTING"-->
-<!--        android:textSize="60sp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.5"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/toolbar5" />-->
+    <!--    <EditText-->
+    <!--        android:id="@+id/test"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="232dp"-->
+    <!--        android:hint="TESTING"-->
+    <!--        android:textSize="60sp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.5"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/toolbar5" />-->
 
     <Button
         android:id="@+id/inc1BTN"
@@ -75,7 +75,7 @@
         android:textSize="60sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loadUserBTN"
         app:layout_constraintVertical_bias="0.349" />
@@ -106,57 +106,75 @@
         app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loadUserBTN"
-        app:layout_constraintVertical_bias="0.997" />
+        app:layout_constraintVertical_bias="0.986" />
 
     <Button
         android:id="@+id/del1BTN"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="204dp"
+        android:layout_width="84dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="302dp"
+        android:layout_marginTop="93dp"
+
         android:background="#412573"
         android:text="DELETE"
-        app:layout_constraintBottom_toTopOf="@+id/inc2BTN"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar5"
-        tools:layout_editor_absoluteX="311dp" />
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/inc1BTN"
+
+        app:layout_constraintEnd_toEndOf="@+id/inc1BTN"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/inc1BTN"
+        app:layout_constraintTop_toTopOf="@+id/inc1BTN"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/del2BTN"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:layout_marginBottom="1dp"
+        android:layout_width="84dp"
+        android:layout_height="40dp"
+
+        android:layout_marginStart="302dp"
+        android:layout_marginTop="93dp"
         android:background="#412573"
         android:text="DELETE"
-        app:layout_constraintBottom_toTopOf="@id/del3BTN"
-        app:layout_constraintTop_toBottomOf="@id/inc1BTN"
-        app:layout_constraintVertical_bias="0.325"
-        tools:layout_editor_absoluteX="297dp" />
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/inc2BTN"
+        app:layout_constraintEnd_toEndOf="@+id/inc2BTN"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/inc2BTN"
+        app:layout_constraintTop_toTopOf="@+id/inc2BTN"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/del3BTN"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="1dp"
+        android:layout_width="84dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="302dp"
+        android:layout_marginTop="93dp"
+
         android:background="#412573"
         android:text="DELETE"
-        app:layout_constraintBottom_toTopOf="@id/inc4BTN"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/inc2BTN"
-        app:layout_constraintVertical_bias="0.895" />
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/inc3BTN"
+        app:layout_constraintEnd_toEndOf="@+id/inc3BTN"
+        app:layout_constraintStart_toStartOf="@+id/inc3BTN"
+        app:layout_constraintTop_toTopOf="@+id/inc3BTN"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/del4BTN"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="112dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="84dp"
+        android:layout_height="40dp"
+
+        android:layout_marginStart="302dp"
+        android:layout_marginTop="93dp"
         android:background="#412573"
         android:text="DELETE"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/inc3BTN" />
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/inc4BTN"
+        app:layout_constraintEnd_toEndOf="@+id/inc4BTN"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/inc4BTN"
+        app:layout_constraintTop_toTopOf="@+id/inc4BTN"
+        app:layout_constraintVertical_bias="1.0" />
     <!-- app:layout_constraintBottom_toTopOf="@id/inc4BTN" -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
