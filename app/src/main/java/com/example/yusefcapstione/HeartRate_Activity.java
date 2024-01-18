@@ -106,11 +106,15 @@ public class HeartRate_Activity extends AppCompatActivity {
         configurePermissions();
 
         Button measureHeartRateButton = (Button) findViewById(R.id.heartRateButton);
+        Button recordSymptoms = (Button) findViewById(R.id.record_symptoms);
 
         logger = (TextView) findViewById(R.id.heartRateInstruction);
        // database = new Database(this);
 
         Intent intent = getIntent();
+        String symptomsString = (String) intent.getStringExtra("SYMPTOMS");
+
+        getSymptoms(symptomsString);
 
         if (!isCameraPermitted()) {
             measureHeartRateButton.setEnabled(false);
@@ -122,7 +126,12 @@ public class HeartRate_Activity extends AppCompatActivity {
                 measureHeartRate();
             }
         });
-
+        recordSymptoms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openRecordSymptoms();
+            }
+        });
     }
 
     private void exportDB() {
@@ -163,7 +172,26 @@ public class HeartRate_Activity extends AppCompatActivity {
             return;
         }
     }
+    private void getSymptoms(String symptomsString) {
+        if(symptomsString != null){
+            symptomsString = symptomsString.substring(1);
+            symptomsString = symptomsString.substring(0, symptomsString.length() - 1);
 
+            String[] pairs = symptomsString.split(",");
+            for (int i=0;i<pairs.length;i++) {
+                String pair = pairs[i].trim();
+                String[] keyValue = pair.split("=");
+                symptoms.put(keyValue[0].trim(), keyValue[1].trim());
+            }
+            symptoms.put("Heart Rate", String.valueOf(heartRate));
+            symptoms.put("Resp Rate", respiratoryRate);
+            if (database.updateDbWithSymptoms(symptoms)) {
+                exportDB();
+                Toast.makeText(this, "DB updated", Toast.LENGTH_LONG).show();
+            }
+
+        }
+    }
     public int getHeartRate() {
         if (total_time == 0)
             return 0;
@@ -188,7 +216,16 @@ public class HeartRate_Activity extends AppCompatActivity {
         return max * 30 / total_time;
 
     }
+    public void openRecordSymptoms() {
+        boolean result = database.insertHeartRate(String.valueOf(heartRate), respiratoryRate);
 
+        if (result) {
+            Toast.makeText(this, "Heart rate and respiratory rate inserted successfully", Toast.LENGTH_LONG);
+        }
+
+        Intent intent = new Intent(this, RecordSymptoms.class);
+        startActivity(intent);
+    }
 
     private void measureHeartRate() {
         Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);

@@ -84,7 +84,7 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
 
 
             Button measureRespiratoryButton = (Button) findViewById(R.id.respRateButton);
-
+            Button recordSymptoms = (Button) findViewById(R.id.record_symptoms);
 
             database = new DatabaseTest(this);
 
@@ -100,7 +100,12 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
                     measureRespiratoryRate();
                 }
             });
-
+            recordSymptoms.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    openRecordSymptoms();
+                }
+            });
 
         }
 
@@ -189,7 +194,16 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
             return max * 30 / total_time;
 
         }
+    public void openRecordSymptoms() {
+        boolean result = database.insertHeartRate(String.valueOf(heartRate), respiratoryRate);
 
+        if (result) {
+            Toast.makeText(this, "Heart rate and respiratory rate inserted successfully", Toast.LENGTH_LONG);
+        }
+
+        Intent intent = new Intent(this, RecordSymptoms.class);
+        startActivity(intent);
+    }
 
         @Override
         public void onSensorChanged(SensorEvent event) {
