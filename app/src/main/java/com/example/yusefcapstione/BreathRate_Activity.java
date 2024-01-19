@@ -94,6 +94,23 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
            getSymptoms(symptomsString);
 
 
+
+            // New code for back button initialization and click listener
+            button = findViewById(R.id.backBTN);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(BreathRate_Activity.this, MainActivity.class);
+                    startActivity(intent);
+                }
+            });
+            // End of new code for back button
+
+
+
+
+
+
             measureRespiratoryButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

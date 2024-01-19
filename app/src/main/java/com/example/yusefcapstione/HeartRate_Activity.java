@@ -52,25 +52,8 @@ import android.widget.Button;
 public class HeartRate_Activity extends AppCompatActivity {
     private Button button;
 
-   /* @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_heart_rate);
 
-        button = findViewById(R.id.backBTN);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HeartRate_Activity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    } */
+
 
 
 
@@ -99,6 +82,15 @@ public class HeartRate_Activity extends AppCompatActivity {
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
 
+
+
+
+
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,6 +102,26 @@ public class HeartRate_Activity extends AppCompatActivity {
 
         logger = (TextView) findViewById(R.id.heartRateInstruction);
        // database = new Database(this);
+
+
+
+
+
+        // New code for back button initialization and click listener
+        button = findViewById(R.id.backBTN);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HeartRate_Activity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        // End of new code for back button
+
+
+
+
+
 
         Intent intent = getIntent();
         String symptomsString = (String) intent.getStringExtra("SYMPTOMS");
@@ -133,6 +145,10 @@ public class HeartRate_Activity extends AppCompatActivity {
             }
         });
     }
+
+
+
+
 
     private void exportDB() {
         File file = new File("/storage/self/primary/Download/covid_sym_db.csv");
@@ -341,6 +357,11 @@ public class HeartRate_Activity extends AppCompatActivity {
             return null;
         }
     }
+
+
+
+
+
 
 }
 
