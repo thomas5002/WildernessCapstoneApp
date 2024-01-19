@@ -106,7 +106,7 @@
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.004"
+        app:layout_constraintVertical_bias="0.001"
         app:title="Main Menu"
         app:titleTextColor="@color/white"
         tools:ignore="MissingConstraints"
