@@ -9,8 +9,8 @@ android {
 
     defaultConfig {
         applicationId = "com.example.yusefcapstione"
-        minSdk = 33
-        targetSdk = 33
+        minSdk = 31
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
