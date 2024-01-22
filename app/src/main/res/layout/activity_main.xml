@@ -11,21 +11,21 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="409dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#AAAAAA"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.998"
+        app:layout_constraintVertical_bias="1"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="1dp" />
 
     <Button
         android:id="@+id/hrBTN"
-        android:fontFamily="serif"
-        android:layout_width="380dp"
+        android:fontFamily="sans-serif-light"
+        android:layout_width="match_parent"
         android:layout_height="120dp"
         android:background="@drawable/round_button"
         android:textSize="40sp"
@@ -40,7 +40,7 @@
     <Button
         android:id="@+id/brBTN"
         android:fontFamily="sans-serif-light"
-        android:layout_width="380dp"
+        android:layout_width="match_parent"
         android:layout_height="120dp"
         android:background="@drawable/round_button"
         android:textSize="40sp"
@@ -55,9 +55,10 @@
 
     <Button
         android:id="@+id/GraphBTN"
-        android:layout_width="380dp"
+        android:layout_width="match_parent"
         android:layout_height="120dp"
         android:background="@drawable/round_button"
+        android:fontFamily="sans-serif-light"
         android:text="Graph"
         android:textColor="@android:color/white"
         android:textSize="40sp"
@@ -70,10 +71,11 @@
 
     <Button
         android:id="@+id/SettingBTN"
-        android:layout_width="380dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@drawable/round_button"
         android:textSize="25sp"
+        android:fontFamily="sans-serif-light"
         android:text="Settings ⚙"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -86,9 +88,8 @@
 
     <Button
         android:id="@+id/CameraBTN"
-        android:fontFamily="monospace"
-
-        android:layout_width="380dp"
+        android:fontFamily="sans-serif-light"
+        android:layout_width="match_parent"
         android:layout_height="120dp"
         android:background="@drawable/round_button"
         android:textSize="40sp"
@@ -103,7 +104,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
-        android:layout_width="409dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#0000FF"
         android:minHeight="?attr/actionBarSize"
