@@ -7,7 +7,7 @@
 
     <Button
         android:id="@+id/loadUserBTN"
-        android:layout_width="390dp"
+        android:layout_width="match_parent"
         android:layout_height="79dp"
         android:background="@drawable/round_button"
         android:text="Load Incident"
@@ -21,7 +21,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar5"
-        android:layout_width="409dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
@@ -54,7 +54,7 @@
 
     <Button
         android:id="@+id/inc1BTN"
-        android:layout_width="388dp"
+        android:layout_width="match_parent"
         android:layout_height="133dp"
         android:background="@drawable/round_button"
         android:text="Incident 1"
@@ -68,7 +68,7 @@
 
     <Button
         android:id="@+id/inc2BTN"
-        android:layout_width="388dp"
+        android:layout_width="match_parent"
         android:layout_height="133dp"
         android:background="@drawable/round_button"
         android:text="Incident 2"
@@ -82,7 +82,7 @@
 
     <Button
         android:id="@+id/inc3BTN"
-        android:layout_width="388dp"
+        android:layout_width="match_parent"
         android:layout_height="133dp"
         android:background="@drawable/round_button"
         android:text="Incident 3"
@@ -96,7 +96,7 @@
 
     <Button
         android:id="@+id/inc4BTN"
-        android:layout_width="388dp"
+        android:layout_width="match_parent"
         android:layout_height="133dp"
         android:background="@drawable/round_button"
         android:text="Incident 4"
@@ -119,18 +119,16 @@
         android:text="DELETE"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@+id/inc1BTN"
-
         app:layout_constraintEnd_toEndOf="@+id/inc1BTN"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/inc1BTN"
         app:layout_constraintTop_toTopOf="@+id/inc1BTN"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/del2BTN"
         android:layout_width="84dp"
         android:layout_height="40dp"
-
         android:layout_marginStart="302dp"
         android:layout_marginTop="93dp"
         android:background="#412573"
@@ -157,13 +155,13 @@
         app:layout_constraintEnd_toEndOf="@+id/inc3BTN"
         app:layout_constraintStart_toStartOf="@+id/inc3BTN"
         app:layout_constraintTop_toTopOf="@+id/inc3BTN"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/del4BTN"
         android:layout_width="84dp"
         android:layout_height="40dp"
-
         android:layout_marginStart="302dp"
         android:layout_marginTop="93dp"
         android:background="#412573"
@@ -171,9 +169,9 @@
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@+id/inc4BTN"
         app:layout_constraintEnd_toEndOf="@+id/inc4BTN"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/inc4BTN"
         app:layout_constraintTop_toTopOf="@+id/inc4BTN"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintVertical_bias="1.0" />
     <!-- app:layout_constraintBottom_toTopOf="@id/inc4BTN" -->
 
