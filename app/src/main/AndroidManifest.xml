@@ -27,9 +27,7 @@
             android:exported="false"
             android:label="@string/title_activity_settings"
             android:theme="@style/Theme.YusefCapstione" />
-        <activity
-            android:name=".Graph_Activity"
-            android:exported="false" />
+
         <activity
             android:name=".BreathRate_Activity"
             android:exported="false" />
