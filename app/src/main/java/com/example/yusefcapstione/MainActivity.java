@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-    private Button HRBTN, BRBTN, GRAPHBTN, SETTINGSBTN, CAMERABTN;
+    private Button HRBTN, BRBTN, GRAPHBTN, SETTINGSBTN, CAMERABTN, button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,5 +59,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+        button = findViewById(R.id.backBTN);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Profile_Page.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

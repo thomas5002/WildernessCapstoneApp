@@ -103,12 +103,10 @@ public class HeartRate_Activity extends AppCompatActivity {
         logger = (TextView) findViewById(R.id.heartRateInstruction);
        // database = new Database(this);
 
-
-
-
-
-        // New code for back button initialization and click listener
+        // New code for back button, needs to be within the onCreate function
+        // initialization and click listener, similar to other buttons
         button = findViewById(R.id.backBTN);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,12 +114,7 @@ public class HeartRate_Activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        // End of new code for back button
-
-
-
-
-
+        // End of new code for the back button
 
         Intent intent = getIntent();
         String symptomsString = (String) intent.getStringExtra("SYMPTOMS");
