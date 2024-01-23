@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         GRAPHBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, RecordSymptoms.class);
+                Intent intent = new Intent(MainActivity.this, GraphActivity.class);
                 startActivity(intent);
             }
         });

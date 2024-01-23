@@ -23,8 +23,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.github.mikephil.charting.charts.LineChart;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.util.HashMap;
@@ -34,99 +38,96 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
 
     private Button button;
 
-   /* @Override
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+    private RecordSymptoms graphManager;
+    private TextView tvBreathRate; // The TextView in your layout for displaying the breath rate
+
+    private SensorManager sensorManager;
+    private Sensor accelerometer;
+    private TextView breathRateView;
+    private EditText contactIdInput;
+    private Button calculateButton, saveButton, bkBTN, recordSymptoms;
+    private DatabaseTest database;
+
+    private static final int VIDEO_CAPTURE = 101;
+    private static final int RATE = 26;
+    String filePath;
+    private double heartRate = 0;
+    private String respiratoryRate = "0";
+    private HashMap<String, String> symptoms = new HashMap<String, String>();
+
+
+    private SensorManager accelManage;
+    private Sensor senseAccel;
+    final private int MAX_COUNT = 220;
+    float accelValuesX[] = new float[MAX_COUNT];
+    float accelValuesY[] = new float[MAX_COUNT];
+    float accelValuesZ[] = new float[MAX_COUNT];
+    long time1;
+    long time2;
+    int total_time = 0;
+    int index =0;
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_breath_rate);
+        setContentView(R.layout.activity_breath_rate); // Update with correct layout
 
-        button = findViewById(R.id.backBTN);
-        button.setOnClickListener(new View.OnClickListener() {
+
+        // Initialize your GraphManager here
+        LineChart lineChart = findViewById(R.id.chart); // Make sure you have a LineChart with id 'chart' in your XML
+        graphManager = new RecordSymptoms(this, lineChart);
+
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+        //  tvBreathRate = findViewById(R.id.tvBreathRate);
+        breathRateView = findViewById(R.id.respInstruction);
+        tvBreathRate = findViewById(R.id.tvBreathRate);
+        contactIdInput = findViewById(R.id.contactIdInput);
+        calculateButton = findViewById(R.id.respRateButton);
+        saveButton = findViewById(R.id.saveButton);
+        recordSymptoms = (Button) findViewById(R.id.record_symptoms);
+        EditText contactIdInput = findViewById(R.id.contactIdInput);
+        database = new DatabaseTest(this);
+        bkBTN = findViewById(R.id.backBTN);
+
+        bkBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(BreathRate_Activity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
-    } */
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
+        calculateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int breathRate = calculateBreathRate();
+                displayBreathRate(breathRate);
+                measureRespiratoryRate();
+            }
+        });
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveBreathRate();
+            }
+        });
+     /*   recordSymptoms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openRecordSymptoms();
+            }
+        }); */
     }
 
-
-        private double heartRate = 0;
-        private String respiratoryRate = "0";
-        private HashMap<String, String> symptoms = new HashMap<String, String>();
-
-
-        private SensorManager accelManage;
-        private Sensor senseAccel;
-        final private int MAX_COUNT = 220;
-        float accelValuesX[] = new float[MAX_COUNT];
-        float accelValuesY[] = new float[MAX_COUNT];
-        float accelValuesZ[] = new float[MAX_COUNT];
-        long time1;
-        long time2;
-        int total_time = 0;
-        int index = 0;
-        private DatabaseTest database;
-
-        //Database database;
-
-
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_breath_rate);
-            configurePermissions();
-
-
-            Button measureRespiratoryButton = (Button) findViewById(R.id.respRateButton);
-            Button recordSymptoms = (Button) findViewById(R.id.record_symptoms);
-
-            database = new DatabaseTest(this);
-
-            Intent intent = getIntent();
-            String symptomsString = (String) intent.getStringExtra("SYMPTOMS");
-
-           getSymptoms(symptomsString);
-
-
-
-            // New code for back button initialization and click listener
-            button = findViewById(R.id.backBTN);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(BreathRate_Activity.this, MainActivity.class);
-                    startActivity(intent);
-                }
-            });
-            // End of new code for back button
-
-
-
-
-
-
-            measureRespiratoryButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    measureRespiratoryRate();
-                }
-            });
-            recordSymptoms.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    openRecordSymptoms();
-                }
-            });
-
-        }
-
-   private void exportDB() {
+  /* private void exportDB() {
         File file = new File("/storage/self/primary/Download/covid_sym_db.csv");
 
         try {
@@ -145,9 +146,9 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
         catch(Exception sqlEx) {
             Log.e("MainActivity", sqlEx.getMessage(), sqlEx);
         }
-    }
+    } */
 
-    private void getSymptoms(String symptomsString) {
+   /* private void getSymptoms(String symptomsString) {
         if(symptomsString != null){
             symptomsString = symptomsString.substring(1);
             symptomsString = symptomsString.substring(0, symptomsString.length() - 1);
@@ -166,7 +167,7 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
             }
 
         }
-    }
+    } */
 
 
         void configurePermissions() {
@@ -187,7 +188,7 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
         }
 
 
-        public int getHeartRate() {
+        public int calculateBreathRate() {
             if (total_time == 0)
                 return 0;
             float xSum = 0, ySum = 0, zSum = 0;
@@ -211,7 +212,7 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
             return max * 30 / total_time;
 
         }
-    public void openRecordSymptoms() {
+   /* public void openRecordSymptoms() {
         boolean result = database.insertHeartRate(String.valueOf(heartRate), respiratoryRate);
 
         if (result) {
@@ -220,7 +221,7 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
 
         Intent intent = new Intent(this, RecordSymptoms.class);
         startActivity(intent);
-    }
+    } */
 
         @Override
         public void onSensorChanged(SensorEvent event) {
@@ -239,7 +240,7 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
                     total_time = (int) ((time2 - time1) / 1000);
                     accelManage.unregisterListener(this);
 
-                    int breathRate = getHeartRate();
+                    int breathRate = calculateBreathRate();
 
                     respiratoryRate = String.valueOf(breathRate);
                     Toast.makeText(getApplicationContext(), "Breathing rate is: " + respiratoryRate, Toast.LENGTH_LONG).show();
@@ -250,8 +251,65 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
             }
         }
 
+    private void saveBreathRate() {
+        try {
+            String contactId = contactIdInput.getText().toString();
+            if (contactId.isEmpty()) {
+                Toast.makeText(this, "Contact ID is required.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            int breathRate;
+            // Extracting the numeric part of the breath rate from the correct TextView
+            String breathRateText = tvBreathRate.getText().toString();
+            String numericPart = breathRateText.replaceAll("[^\\d]", ""); // Remove any non-digit characters
+
+            try {
+                breathRate = Integer.parseInt(numericPart);
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, "Invalid breath rate.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Assuming saveBreathRate returns the row ID of the new entry or -1 on failure.
+            long result = database.saveOrUpdateBreathRate(contactId, breathRate);
+
+            if (result < 0) {
+                Toast.makeText(this, "Failed to save breath rate.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Breath rate saved successfully.", Toast.LENGTH_SHORT).show();
+                graphManager.updateGraph(); // Update the graph with the latest data
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
+
+    private void displayBreathRate(int breathRate) {
+        tvBreathRate.setText("Breath Rate: " + breathRate);
+
+    }
+
+
+
         @Override
         public void onAccuracyChanged(Sensor sensor, int i) {
 
         }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(this);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+}
+
+
+

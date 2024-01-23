@@ -32,6 +32,7 @@ import android.util.Log;
 import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,14 +50,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+
+
 public class HeartRate_Activity extends AppCompatActivity {
-    private Button button;
+    private Button button, measureHeartRateButton, recordSymptoms, saveButton;
+
+    private TextView tvHeartRate;
 
 
 
-
-
-
+    private EditText contactIdInput;
     private static final int VIDEO_CAPTURE = 101;
     private static final int RATE = 26;
     String filePath;
@@ -97,8 +100,11 @@ public class HeartRate_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_heart_rate);
         configurePermissions();
 
-        Button measureHeartRateButton = (Button) findViewById(R.id.heartRateButton);
-        Button recordSymptoms = (Button) findViewById(R.id.record_symptoms);
+         measureHeartRateButton = (Button) findViewById(R.id.heartRateButton);
+         recordSymptoms = (Button) findViewById(R.id.record_symptoms);
+        contactIdInput = findViewById(R.id.contactIdInput);
+        tvHeartRate = findViewById(R.id.tvHeartRate);
+        saveButton = findViewById(R.id.saveButton);
 
         logger = (TextView) findViewById(R.id.heartRateInstruction);
        // database = new Database(this);
@@ -114,12 +120,19 @@ public class HeartRate_Activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveHeartRate();
+            }
+        });
         // End of new code for the back button
 
-        Intent intent = getIntent();
-        String symptomsString = (String) intent.getStringExtra("SYMPTOMS");
+        //Intent intent = getIntent();
+        //String symptomsString = (String) intent.getStringExtra("SYMPTOMS");
 
-        getSymptoms(symptomsString);
+        //getSymptoms(symptomsString);
 
         if (!isCameraPermitted()) {
             measureHeartRateButton.setEnabled(false);
@@ -128,22 +141,24 @@ public class HeartRate_Activity extends AppCompatActivity {
         measureHeartRateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                double heartRate = getHeartRate();
+                displayHeartRate(heartRate);
                 measureHeartRate();
             }
         });
-        recordSymptoms.setOnClickListener(new View.OnClickListener() {
+       /* recordSymptoms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openRecordSymptoms();
             }
-        });
+        }); */
     }
 
 
 
 
 
-    private void exportDB() {
+   /* private void exportDB() {
         File file = new File("/storage/self/primary/Download/covid_sym_db.csv");
 
         try {
@@ -160,7 +175,7 @@ public class HeartRate_Activity extends AppCompatActivity {
         } catch (Exception sqlEx) {
             Log.e("MainActivity", sqlEx.getMessage(), sqlEx);
         }
-    }
+    } */
 
 
     private boolean isCameraPermitted() {
@@ -181,7 +196,7 @@ public class HeartRate_Activity extends AppCompatActivity {
             return;
         }
     }
-    private void getSymptoms(String symptomsString) {
+ /*   private void getSymptoms(String symptomsString) {
         if(symptomsString != null){
             symptomsString = symptomsString.substring(1);
             symptomsString = symptomsString.substring(0, symptomsString.length() - 1);
@@ -200,7 +215,7 @@ public class HeartRate_Activity extends AppCompatActivity {
             }
 
         }
-    }
+    } */
     public int getHeartRate() {
         if (total_time == 0)
             return 0;
@@ -225,7 +240,7 @@ public class HeartRate_Activity extends AppCompatActivity {
         return max * 30 / total_time;
 
     }
-    public void openRecordSymptoms() {
+    /*public void openRecordSymptoms() {
         boolean result = database.insertHeartRate(String.valueOf(heartRate), respiratoryRate);
 
         if (result) {
@@ -234,7 +249,7 @@ public class HeartRate_Activity extends AppCompatActivity {
 
         Intent intent = new Intent(this, RecordSymptoms.class);
         startActivity(intent);
-    }
+    } */
 
     private void measureHeartRate() {
         Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
@@ -351,6 +366,44 @@ public class HeartRate_Activity extends AppCompatActivity {
         }
     }
 
+    private void saveHeartRate()  {
+        try {
+            String contactId = contactIdInput.getText().toString();
+            if (contactId.isEmpty()) {
+                Toast.makeText(this, "Contact ID is required.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            int HeartRate;
+            // Extracting the numeric part of the breath rate from the correct TextView
+            String heartRateText = tvHeartRate.getText().toString();
+            String numericPart = heartRateText.replaceAll("[^\\d]", ""); // Remove any non-digit characters
+
+            try {
+                HeartRate= Integer.parseInt(numericPart);
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, "Invalid heart rate.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Assuming saveBreathRate returns the row ID of the new entry or -1 on failure.
+            long result = database.saveOrUpdateHeartRate(contactId, heartRate);
+
+            if (result < 0) {
+                Toast.makeText(this, "Failed to save breath rate.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Heart rate saved successfully.", Toast.LENGTH_SHORT).show();
+                RecordSymptoms.updateGraph(); // Update the graph with the latest data
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
+    private void displayHeartRate(double heartRate) {
+        tvHeartRate.setText("Heart Rate: " + heartRate);
+
+    }
 
 
 
