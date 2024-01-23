@@ -25,24 +25,30 @@
         <activity
             android:name=".Settings_Activity"
             android:exported="false"
+            android:launchMode="singleTask"
             android:label="@string/title_activity_settings"
             android:theme="@style/Theme.YusefCapstione" />
 
         <activity
             android:name=".BreathRate_Activity"
+            android:launchMode="singleTask"
             android:exported="false" />
         <activity
             android:name=".HeartRate_Activity"
+            android:launchMode="singleTask"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:launchMode="singleTask"
             android:exported="false" />
 
         <activity
             android:name=".Camera_Activity"
+            android:launchMode="singleTask"
             android:exported="false" />
         <activity
             android:name=".Profile_Page"
+            android:launchMode="singleTask"
             android:exported="true">
 
             <intent-filter>

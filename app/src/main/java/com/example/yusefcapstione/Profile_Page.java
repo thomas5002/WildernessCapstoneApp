@@ -15,12 +15,19 @@ public class Profile_Page extends AppCompatActivity {
 
     private Button LOADUSERBTN, INC1BTN, INC2BTN, INC3BTN, INC4BTN, DEL1BTN, DEL2BTN, DEL3BTN, DEL4BTN;
     private EditText editText; // Added line for name change
-    public int visC = 0;
+    public int visC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        int i=0;
+        i++;
+
+        if (i == 0){
+            visC = 0;
+        }
 
         LOADUSERBTN = findViewById(R.id.loadUserBTN);
         INC1BTN = findViewById(R.id.inc1BTN);
