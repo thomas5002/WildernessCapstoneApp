@@ -52,19 +52,35 @@
 
     <Button
         android:id="@+id/GraphBTN"
-        android:layout_width="match_parent"
+        android:layout_width="204dp"
         android:layout_height="120dp"
         android:background="@drawable/round_button"
         android:fontFamily="sans-serif-light"
-        android:text="Graph"
+        android:text="HR Graph"
         android:textColor="@android:color/white"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.548"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.88" />
+        app:layout_constraintVertical_bias="0.872" />
+
+    <Button
+        android:id="@+id/Graph2BTN"
+        android:layout_width="202dp"
+        android:layout_height="121dp"
+        android:background="@drawable/round_button"
+        android:fontFamily="sans-serif-light"
+        android:text="Breath Graph"
+        android:textColor="@android:color/white"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.872" />
 
     <Button
         android:id="@+id/SettingBTN"

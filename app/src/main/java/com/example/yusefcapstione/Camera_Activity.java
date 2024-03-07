@@ -1,7 +1,3 @@
-
-
-
-
 package com.example.yusefcapstione;
 
 import android.os.Bundle;

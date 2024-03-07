@@ -57,6 +57,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".GraphMain"
+            android:launchMode="singleTask"
+            android:exported="false" />
+        <activity
+        android:name=".MyHelper"
+        android:launchMode="singleTask"
+        android:exported="false" />
+        <activity
+            android:name=".GraphMain2"
+            android:launchMode="singleTask"
+            android:exported="false" />
+        <activity
+            android:name=".MyHelper2"
+            android:launchMode="singleTask"
+            android:exported="false" />
     </application>
 
 </manifest>

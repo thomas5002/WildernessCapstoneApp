@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-    private Button HRBTN, BRBTN, GRAPHBTN, SETTINGSBTN, CAMERABTN, backbutton;
+    private Button HRBTN, BRBTN, GRAPHBTN, SETTINGSBTN, CAMERABTN, backbutton, GRAPH2BTN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,8 +17,10 @@ public class MainActivity extends AppCompatActivity {
         HRBTN = findViewById(R.id.hrBTN);
         BRBTN = findViewById(R.id.brBTN);
         GRAPHBTN = findViewById(R.id.GraphBTN);
+        GRAPH2BTN = findViewById(R.id.Graph2BTN);
         SETTINGSBTN = findViewById(R.id.SettingBTN);
         CAMERABTN = findViewById(R.id.CameraBTN);
+        backbutton = findViewById(R.id.backBTN);
 
         HRBTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,7 +41,15 @@ public class MainActivity extends AppCompatActivity {
         GRAPHBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, GraphActivity.class);
+                Intent intent = new Intent(MainActivity.this, GraphMain.class);
+                startActivity(intent);
+            }
+        });
+
+        GRAPH2BTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, GraphMain2.class);
                 startActivity(intent);
             }
         });
@@ -61,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        backbutton = findViewById(R.id.backBTN);
+
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

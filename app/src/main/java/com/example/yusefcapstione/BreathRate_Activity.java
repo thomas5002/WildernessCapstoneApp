@@ -219,7 +219,7 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
             Toast.makeText(this, "Heart rate and respiratory rate inserted successfully", Toast.LENGTH_LONG);
         }
 
-        Intent intent = new Intent(this, RecordSymptoms.class);
+        Intent intent = new Intent(this, GraphMain.class);
         startActivity(intent);
     } */
 
