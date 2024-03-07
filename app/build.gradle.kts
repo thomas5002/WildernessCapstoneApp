@@ -46,7 +46,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.navigation:navigation-fragment:2.7.6")
     implementation("androidx.navigation:navigation-ui:2.7.6")
- //   implementation("com.jjoe64:graphview:4.2.2")//GraphView
+    implementation("com.jjoe64:graphview:4.2.2")//GraphView
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
@@ -56,6 +56,12 @@ dependencies {
     implementation ("androidx.camera:camera-lifecycle:1.3.1") //camera
     implementation ("androidx.camera:camera-view:1.3.1") //camera
     implementation ("androidx.camera:camera-core:1.3.1") //camera
+
+    implementation ("com.github.bumptech.glide:glide:4.12.0")  //camera database
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0") //camera database
+
+
+
 }
 
 
