@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         HRBTN = findViewById(R.id.hrBTN);
         BRBTN = findViewById(R.id.brBTN);
         GRAPHBTN = findViewById(R.id.GraphBTN);
-        GRAPH2BTN = findViewById(R.id.Graph2BTN);
+        GRAPH2BTN = findViewById( R.id.Graph2BTN);
         SETTINGSBTN = findViewById(R.id.SettingBTN);
         CAMERABTN = findViewById(R.id.CameraBTN);
         backbutton = findViewById(R.id.backBTN);

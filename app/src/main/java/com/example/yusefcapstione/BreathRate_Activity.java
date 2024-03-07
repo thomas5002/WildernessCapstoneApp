@@ -71,7 +71,7 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
         long time2;
         int total_time = 0;
         int index = 0;
-        private DatabaseTest database;
+        //private DatabaseTest database;
 
         //Database database;
 
@@ -86,12 +86,12 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
             Button measureRespiratoryButton = (Button) findViewById(R.id.respRateButton);
             Button recordSymptoms = (Button) findViewById(R.id.record_symptoms);
 
-            database = new DatabaseTest(this);
+            //database = new DatabaseTest(this);
 
             Intent intent = getIntent();
             String symptomsString = (String) intent.getStringExtra("SYMPTOMS");
 
-           getSymptoms(symptomsString);
+           //getSymptoms(symptomsString);
 
 
 
@@ -120,11 +120,13 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
             recordSymptoms.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    openRecordSymptoms();
+                    //openRecordSymptoms();
                 }
             });
 
         }
+
+
 /*
    private void exportDB() {
         File file = new File("/storage/self/primary/Download/covid_sym_db.csv");
@@ -147,6 +149,7 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
         }
     }
 */
+    /*
     private void getSymptoms(String symptomsString) {
         if(symptomsString != null){
             symptomsString = symptomsString.substring(1);
@@ -167,7 +170,7 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
 
         }
     }
-
+*/
 
         void configurePermissions() {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -211,6 +214,7 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
             return max * 30 / total_time;
 
         }
+        /*
     public void openRecordSymptoms() {
         boolean result = database.insertHeartRate(String.valueOf(heartRate), respiratoryRate);
 
@@ -221,6 +225,8 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
         Intent intent = new Intent(this, GraphMain.class);
         startActivity(intent);
     }
+    /*
+         */
 
         @Override
         public void onSensorChanged(SensorEvent event) {

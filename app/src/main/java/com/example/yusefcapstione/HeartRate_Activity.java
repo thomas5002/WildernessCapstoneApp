@@ -76,7 +76,7 @@ public class HeartRate_Activity extends AppCompatActivity {
     int total_time = 0;
     int index = 0;
     TextView logger;
-   DatabaseTest database;
+   //DatabaseTest database;
     private  String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -134,7 +134,7 @@ public class HeartRate_Activity extends AppCompatActivity {
         recordSymptoms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openRecordSymptoms();
+                //openRecordSymptoms();
             }
         });
     }
@@ -194,10 +194,13 @@ public class HeartRate_Activity extends AppCompatActivity {
             }
             symptoms.put("Heart Rate", String.valueOf(heartRate));
             symptoms.put("Resp Rate", respiratoryRate);
+            /*
             if (database.updateDbWithSymptoms(symptoms)) {
                 //exportDB();
                 Toast.makeText(this, "DB updated", Toast.LENGTH_LONG).show();
             }
+
+             */
 
         }
     }
@@ -225,6 +228,7 @@ public class HeartRate_Activity extends AppCompatActivity {
         return max * 30 / total_time;
 
     }
+    /*
     public void openRecordSymptoms() {
         boolean result = database.insertHeartRate(String.valueOf(heartRate), respiratoryRate);
 
@@ -234,7 +238,7 @@ public class HeartRate_Activity extends AppCompatActivity {
 
         Intent intent = new Intent(this, GraphMain.class);
         startActivity(intent);
-    }
+    }*/
 
     private void measureHeartRate() {
         Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
