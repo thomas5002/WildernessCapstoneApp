@@ -52,7 +52,7 @@ public class CameraRoll_Activity extends AppCompatActivity {
         Cursor cursor = db.query(CameraHelper.TABLE_NAME, projection, null, null, null, null, null);
         if (cursor != null && cursor.moveToFirst()) {
             do {
-                String photoPath = cursor.getString(cursor.getColumnIndex(CameraHelper.COLUMN_FILE_PATH));
+                @SuppressLint("Range") String photoPath = cursor.getString(cursor.getColumnIndex(CameraHelper.COLUMN_FILE_PATH));
                 photoPaths.add(photoPath);
             } while (cursor.moveToNext());
             cursor.close();
