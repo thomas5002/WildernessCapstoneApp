@@ -22,6 +22,13 @@ public class MainActivity extends AppCompatActivity {
         CAMERABTN = findViewById(R.id.CameraBTN);
         backbutton = findViewById(R.id.backBTN);
 
+        // Clear the data at the start of a new session
+        MyHelper myHelper = new MyHelper(this);
+        myHelper.clearData();
+        // Clear the data at the start of a new session
+        MyHelper2 myHelper2 = new MyHelper2(this);
+        myHelper2.clearData();
+
         HRBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
