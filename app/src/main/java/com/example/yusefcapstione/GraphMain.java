@@ -24,7 +24,6 @@ public class GraphMain extends AppCompatActivity {
     EditText xInput, yInput;
     GraphView graph;
 
-
     TextInputLayout xInputLayout, yInputLayout;
     LineGraphSeries<DataPoint> series;
     MyHelper myHelper;
@@ -111,8 +110,6 @@ public class GraphMain extends AppCompatActivity {
         cursor.close(); // It's a good practice to close the cursor
         return dp;
     }
-
-
 }
 
 
