@@ -24,6 +24,7 @@ public class GraphMain extends AppCompatActivity {
     EditText xInput, yInput;
     GraphView graph;
 
+
     TextInputLayout xInputLayout, yInputLayout;
     LineGraphSeries<DataPoint> series;
     MyHelper myHelper;
