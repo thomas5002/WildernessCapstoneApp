@@ -39,4 +39,9 @@ public class MyHelper2 extends SQLiteOpenHelper {
         Toast.makeText(con2, "Data Logged", Toast.LENGTH_LONG).show();
 
     }
+    public void clearData() {
+        SQLiteDatabase db2 = this.getWritableDatabase();
+        db2.delete("MyTable", null, null); // Adjust "MyTable" as necessary for your app
+        db2.close();
+    }
 }
