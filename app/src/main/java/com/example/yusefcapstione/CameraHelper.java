@@ -1,28 +1,25 @@
 package com.example.yusefcapstione;
-
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CameraHelper extends SQLiteOpenHelper {
-    public static final String COLUMN_FILE_PATH = "file_path";
-    public static final String TABLE_NAME = "photos";
     // Define your database name and version
     private static final String DATABASE_NAME = "your_database_name.db";
     private static final int DATABASE_VERSION = 1;
 
-    // Define your table name
-    //private static final String TABLE_NAME = "photos";
-
-    // Define the column names
-    private static final String COLUMN_ID = "id";
-    //private static final String COLUMN_FILE_PATH = "file_path";
+    // Define your table name and column name
+    public static final String TABLE_NAME = "photos";
+    public static final String COLUMN_FILE_PATH = "file_path";
 
     // Define the SQL statement to create the table
     private static final String SQL_CREATE_TABLE =
             "CREATE TABLE " + TABLE_NAME + " (" +
-                    COLUMN_ID + " INTEGER PRIMARY KEY," +
                     COLUMN_FILE_PATH + " TEXT)";
 
     public CameraHelper(Context context) {
@@ -51,4 +48,21 @@ public class CameraHelper extends SQLiteOpenHelper {
 
         db.close();
     }
+
+    // Method to retrieve all photo paths from the database
+    public List<String> getAllPhotoPaths() {
+        List<String> photoPaths = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(TABLE_NAME, new String[]{COLUMN_FILE_PATH}, null, null, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                String photoPath = cursor.getString(cursor.getColumnIndex(COLUMN_FILE_PATH));
+                photoPaths.add(photoPath);
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+        db.close();
+        return photoPaths;
+    }
 }
+
