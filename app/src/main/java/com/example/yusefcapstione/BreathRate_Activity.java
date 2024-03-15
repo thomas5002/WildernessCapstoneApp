@@ -1,8 +1,10 @@
 package com.example.yusefcapstione;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +30,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class BreathRate_Activity extends AppCompatActivity implements SensorEventListener  {
 
@@ -47,6 +50,22 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
             }
         });
     } */
+   @Override
+   protected void onPause() {
+       super.onPause();
+       if (countDownTimer != null) {
+           countDownTimer.cancel();
+       }
+   }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+        }
+    }
+
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -58,7 +77,10 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
         private double heartRate = 0;
         private String respiratoryRate = "0";
         private HashMap<String, String> symptoms = new HashMap<String, String>();
-
+        private int buttonPressCount = 0;
+        private long startTimeMillis = 0;
+        private CountDownTimer countDownTimer;
+        private TextView timerTextView;
 
         private SensorManager accelManage;
         private Sensor senseAccel;
@@ -69,8 +91,9 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
         long time1;
         long time2;
         int total_time = 0;
+        int x;
         int index = 0;
-        //private DatabaseTest database;
+       // private DatabaseTest database;
 
         //Database database;
 
@@ -84,15 +107,18 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
 
             Button measureRespiratoryButton = (Button) findViewById(R.id.respRateButton);
             Button recordSymptoms = (Button) findViewById(R.id.record_symptoms);
+            Button respiratoryRateButton = findViewById(R.id.manBTN);
+            timerTextView = (TextView) findViewById(R.id.timerTextView);
 
-            //database = new DatabaseTest(this);
+           // database = new DatabaseTest(this);
 
-            Intent intent = getIntent();
-            String symptomsString = (String) intent.getStringExtra("SYMPTOMS");
+            //Intent intent = getIntent();
+           // String symptomsString = (String) intent.getStringExtra("SYMPTOMS");
 
            //getSymptoms(symptomsString);
-
-
+            /*Intent intent = new Intent(BreathRate_Activity.this, GraphMain.class);
+            intent.putExtra("respiratoryRate", x); // calculatedRespiratoryRate is your float value
+            startActivity(intent);*/
 
             // New code for back button initialization and click listener
             button = findViewById(R.id.backBTN);
@@ -114,18 +140,68 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
                 @Override
                 public void onClick(View view) {
                     measureRespiratoryRate();
+
                 }
             });
             recordSymptoms.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //openRecordSymptoms();
+                Intent intent = new Intent(BreathRate_Activity.this, GraphMain2.class);
+                intent.putExtra("respiratoryRate", x); // calculatedRespiratoryRate is your float value
+                startActivity(intent);
+                }
+            });
+            respiratoryRateButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // Start timing on the first press
+                    if (buttonPressCount == 0) {
+                        startTimeMillis = System.currentTimeMillis();
+                        startTimer(60000);
+                    }
+                    buttonPressCount++;
+
+
+                    // Calculate the elapsed time in minutes
+                    long currentTimeMillis = System.currentTimeMillis();
+                    float elapsedTimeMinutes = (currentTimeMillis - startTimeMillis) / 60000.0f;
+
+                    // Calculate the respiratory rate if at least one minute has passed
+                    if (elapsedTimeMinutes >= 1) {
+                        int respiratoryRate = Math.round(buttonPressCount / elapsedTimeMinutes);
+                        // Reset the count and timestamp
+                        buttonPressCount = 0;
+                        startTimeMillis = 0;
+
+                        // Display or use the respiratory rate value
+                        ((TextView) findViewById(R.id.respInstruction)).setText("Respiratory rate: " + respiratoryRate + " breaths per minute");
+
+                    }
                 }
             });
 
+
+
+
         }
+    private void startTimer(long timeInMilliseconds) {
+        countDownTimer = new CountDownTimer(timeInMilliseconds, 1000) {
 
+            public void onTick(long millisUntilFinished) {
+                // Update the timer TextView every second
+                timerTextView.setText(String.format(Locale.getDefault(), "%02d:%02d",
+                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
+                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
+                                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+            }
 
+            public void onFinish() {
+                timerTextView.setText("00:00");
+                // Optional: Code to be executed when the timer finishes
+            }
+        }.start();
+
+    }
 /*
    private void exportDB() {
         File file = new File("/storage/self/primary/Download/covid_sym_db.csv");
@@ -148,8 +224,7 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
         }
     }
 */
-    /*
-    private void getSymptoms(String symptomsString) {
+   /* private void getSymptoms(String symptomsString) {
         if(symptomsString != null){
             symptomsString = symptomsString.substring(1);
             symptomsString = symptomsString.substring(0, symptomsString.length() - 1);
@@ -168,8 +243,8 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
             }
 
         }
-    }
-*/
+    }*/
+
 
         void configurePermissions() {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -189,7 +264,7 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
         }
 
 
-        public int getHeartRate() {
+        public int getBreathRate() {
             if (total_time == 0)
                 return 0;
             float xSum = 0, ySum = 0, zSum = 0;
@@ -210,11 +285,10 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
             }
             int max = Math.max(xCount, Math.max(yCount, zCount));
 
-            return max * 30 / total_time;
+            return x = max * 30 / total_time;
 
         }
-        /*
-    public void openRecordSymptoms() {
+  /*  public void openRecordSymptoms() {
         boolean result = database.insertHeartRate(String.valueOf(heartRate), respiratoryRate);
 
         if (result) {
@@ -223,9 +297,7 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
 
         Intent intent = new Intent(this, GraphMain.class);
         startActivity(intent);
-    }
-    /*
-         */
+    } */
 
         @Override
         public void onSensorChanged(SensorEvent event) {
@@ -244,7 +316,7 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
                     total_time = (int) ((time2 - time1) / 1000);
                     accelManage.unregisterListener(this);
 
-                    int breathRate = getHeartRate();
+                    int breathRate = getBreathRate();
 
                     respiratoryRate = String.valueOf(breathRate);
                     Toast.makeText(getApplicationContext(), "Breathing rate is: " + respiratoryRate, Toast.LENGTH_LONG).show();

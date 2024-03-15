@@ -134,7 +134,9 @@ public class HeartRate_Activity extends AppCompatActivity {
         recordSymptoms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //openRecordSymptoms();
+                Intent intent = new Intent(HeartRate_Activity.this, GraphMain.class);
+                intent.putExtra("heartRate", heartRate); // calculatedRespiratoryRate is your float value
+                startActivity(intent);
             }
         });
     }
@@ -195,12 +197,12 @@ public class HeartRate_Activity extends AppCompatActivity {
             symptoms.put("Heart Rate", String.valueOf(heartRate));
             symptoms.put("Resp Rate", respiratoryRate);
             /*
-            if (database.updateDbWithSymptoms(symptoms)) {
+           /* if (database.updateDbWithSymptoms(symptoms)) {
                 //exportDB();
                 Toast.makeText(this, "DB updated", Toast.LENGTH_LONG).show();
-            }
+            } */
 
-             */
+
 
         }
     }
@@ -229,7 +231,7 @@ public class HeartRate_Activity extends AppCompatActivity {
 
     }
     /*
-    public void openRecordSymptoms() {
+   /* public void openRecordSymptoms() {
         boolean result = database.insertHeartRate(String.valueOf(heartRate), respiratoryRate);
 
         if (result) {

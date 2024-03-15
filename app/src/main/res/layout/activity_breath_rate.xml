@@ -12,11 +12,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="23dp"
+        android:layout_marginBottom="64dp"
         android:background="@color/blue"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toTopOf="@+id/saveButton"
+        app:layout_constraintBottom_toTopOf="@+id/timerTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -28,89 +28,81 @@
         android:id="@+id/backBTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="78dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="567dp"
         android:backgroundTint="@color/blue"
         android:text="BackButton"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/record_symptoms" />
+        app:layout_constraintBottom_toTopOf="@+id/record_symptoms"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar3"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/respInstruction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="169dp"
+        android:layout_height="0dp"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_marginBottom="19dp"
+        android:layout_marginBottom="15dp"
         android:text="Place device on chest"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/respRateButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/saveButton" />
-
-    <EditText
-        android:id="@+id/contactIdInput"
-        android:layout_width="379dp"
-        android:layout_height="72dp"
-        android:hint="Enter Contact ID"
-        android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar3"
-        app:layout_constraintVertical_bias="0.285" />
+        app:layout_constraintTop_toBottomOf="@+id/manBTN" />
 
     <Button
         android:id="@+id/respRateButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_marginStart="5dp"
-        android:layout_marginBottom="29dp"
+        android:layout_marginStart="59dp"
+        android:layout_marginEnd="59dp"
+        android:layout_marginBottom="15dp"
         android:width="300dp"
         android:text="MEASURE RESPIRATORY RATE"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/record_symptoms"
-        app:layout_constraintStart_toStartOf="@+id/record_symptoms"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/respInstruction"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/tvBreathRate"
-        android:layout_width="115dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginBottom="396dp"
-        android:text="Breath Rate: 0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/saveButton"
-        app:layout_constraintVertical_bias="1.0" />
+        android:id="@+id/timerTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="26dp"
+        android:layout_marginBottom="20dp"
+        android:text="01:00"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/manBTN"
+        app:layout_constraintStart_toStartOf="@+id/manBTN"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
 
     <Button
         android:id="@+id/record_symptoms"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="46dp"
-        android:layout_marginEnd="46dp"
-        android:layout_marginBottom="74dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="52dp"
         android:text="RECORD SYMPTOMS"
-        app:layout_constraintBottom_toTopOf="@+id/backBTN"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/respRateButton" />
+        app:layout_constraintTop_toBottomOf="@+id/backBTN" />
 
     <Button
-        android:id="@+id/saveButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="240dp"
-        android:text="Save Breath Rate"
+        android:id="@+id/manBTN"
+        android:layout_width="129dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="198dp"
+        android:text="Manual Measurment"
         app:layout_constraintBottom_toTopOf="@+id/respInstruction"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
+        app:layout_constraintTop_toBottomOf="@+id/timerTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
