@@ -168,13 +168,13 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
 
                     // Calculate the respiratory rate if at least one minute has passed
                     if (elapsedTimeMinutes >= 1) {
-                        int respiratoryRate = Math.round(buttonPressCount / elapsedTimeMinutes);
+                        x = Math.round(buttonPressCount / elapsedTimeMinutes);
                         // Reset the count and timestamp
                         buttonPressCount = 0;
                         startTimeMillis = 0;
 
                         // Display or use the respiratory rate value
-                        ((TextView) findViewById(R.id.respInstruction)).setText("Respiratory rate: " + respiratoryRate + " breaths per minute");
+                        ((TextView) findViewById(R.id.respInstruction)).setText("Respiratory rate: " + x + " breaths per minute");
 
                     }
                 }

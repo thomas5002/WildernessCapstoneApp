@@ -44,12 +44,33 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.TimeUnit;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 public class HeartRate_Activity extends AppCompatActivity {
+
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+        }
+    }
+
     private Button button;
 
 
@@ -64,6 +85,10 @@ public class HeartRate_Activity extends AppCompatActivity {
     private String respiratoryRate = "0";
     private HashMap<String, String> symptoms = new HashMap<String, String>();
 
+    private int buttonPressCount = 0;
+    private long startTimeMillis = 0;
+    private CountDownTimer countDownTimer;
+    private TextView timerTextView;
 
     private SensorManager accelManage;
     private Sensor senseAccel;
@@ -99,7 +124,8 @@ public class HeartRate_Activity extends AppCompatActivity {
 
         Button measureHeartRateButton = (Button) findViewById(R.id.heartRateButton);
         Button recordSymptoms = (Button) findViewById(R.id.record_symptoms);
-
+        Button respiratoryRateButton = findViewById(R.id.manBTN);
+        timerTextView = (TextView) findViewById(R.id.timerTextView);
         logger = (TextView) findViewById(R.id.heartRateInstruction);
        // database = new Database(this);
 
@@ -139,6 +165,56 @@ public class HeartRate_Activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        respiratoryRateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Start timing on the first press
+                if (buttonPressCount == 0) {
+                    startTimeMillis = System.currentTimeMillis();
+                    startTimer(60000);
+                }
+                buttonPressCount++;
+
+
+                // Calculate the elapsed time in minutes
+                long currentTimeMillis = System.currentTimeMillis();
+                float elapsedTimeMinutes = (currentTimeMillis - startTimeMillis) / 60000.0f;
+
+                // Calculate the respiratory rate if at least one minute has passed
+                if (elapsedTimeMinutes >= 1) {
+                    heartRate = Math.round(buttonPressCount / elapsedTimeMinutes);
+                    // Reset the count and timestamp
+                    buttonPressCount = 0;
+                    startTimeMillis = 0;
+
+                    // Display or use the respiratory rate value
+                    ((TextView) findViewById(R.id.respInstruction)).setText("Heart rate: " + heartRate + " beats per minute");
+
+                }
+            }
+        });
+
+
+
+
+    }
+    private void startTimer(long timeInMilliseconds) {
+        countDownTimer = new CountDownTimer(timeInMilliseconds, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                // Update the timer TextView every second
+                timerTextView.setText(String.format(Locale.getDefault(), "%02d:%02d",
+                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
+                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
+                                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+            }
+
+            public void onFinish() {
+                timerTextView.setText("00:00");
+                // Optional: Code to be executed when the timer finishes
+            }
+        }.start();
+
     }
 
 
