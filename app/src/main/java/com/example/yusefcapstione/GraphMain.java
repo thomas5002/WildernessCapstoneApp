@@ -17,12 +17,14 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 public class GraphMain extends AppCompatActivity {
 
+    // UI elements
     private Button button;
     private Button button2;
     EditText xInput, yInput;
     GraphView graph;
-
     TextInputLayout xInputLayout, yInputLayout;
+
+    // Database variables
     LineGraphSeries<DataPoint> series;
     MyHelper myHelper;
     SQLiteDatabase sqLiteDatabase;
@@ -32,23 +34,22 @@ public class GraphMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity);
 
-        button2 = (Button) findViewById(R.id.insertBTN);
-
-        TextInputLayout xInputLayout = findViewById(R.id.inputTextX);
-        TextInputLayout yInputLayout = findViewById(R.id.inputTextY);
-
-        // Now get the EditText from the TextInputLayout
+        // Initialize UI elements
+        button2 = findViewById(R.id.insertBTN);
+        xInputLayout = findViewById(R.id.inputTextX);
+        yInputLayout = findViewById(R.id.inputTextY);
         xInput = xInputLayout.getEditText();
         yInput = yInputLayout.getEditText();
+        graph = findViewById(R.id.graph);
 
-        //Get Graph from layout xml
-        graph = (GraphView) findViewById(R.id.graph);
+        // Initialize database helper and writable database
         myHelper = new MyHelper(this);
         sqLiteDatabase = myHelper.getWritableDatabase();
 
+        // Set onClickListener for insert button
         exqButton();
 
-        // New code for back button initialization and click listener
+        // Set onClickListener for back button
         button = findViewById(R.id.backBTN);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,35 +58,39 @@ public class GraphMain extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
+
+    // Method to handle insert button click
     private void exqButton(){
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                // Replace newlines and spaces with a single space or remove them, then trim
+                // Get input values, clean up and parse them
                 String xValStr = xInput.getText().toString().replaceAll("[\n\\s]+", "").trim();
                 String yValStr = yInput.getText().toString().replaceAll("[\n\\s]+", "").trim();
-
-                // Parse the cleaned-up strings to integers
                 int xVal = Integer.parseInt(xValStr);
                 int yVal = Integer.parseInt(yValStr);
+
+                // Insert data into database
                 myHelper.insertData(xVal,yVal);
 
+                // Add new data to the graph
                 series = new LineGraphSeries<DataPoint>(getData());
                 graph.addSeries(series);
             }
         });
     }
 
+    // Method to retrieve data from database
     private DataPoint[] getData() {
-        //Read data from database
+        // Read data from database
         String[] columns = {"xValues", "yValues"};
         Cursor cursor = sqLiteDatabase.query("MyTable", columns, null, null, null, null, null);
 
+        // Initialize array to store data points
         DataPoint[] dp = new DataPoint[cursor.getCount()];
 
+        // Iterate over cursor to populate data points array
         for (int i = 0; i < cursor.getCount(); i++) {
             cursor.moveToNext();
             dp[i] = new DataPoint(cursor.getInt(0), cursor.getInt(1));
@@ -93,5 +98,3 @@ public class GraphMain extends AppCompatActivity {
         return dp;
     }
 }
-
-

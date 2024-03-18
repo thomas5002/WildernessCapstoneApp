@@ -4,18 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;  //stuff below is added so we can find the edit text so name can be manipulated
-import android.text.Editable;    //added for name change
-import android.text.TextWatcher; //added for name change
+
+
 
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Profile_Page extends AppCompatActivity {
 
+    // Declare UI elements
     private Button LOADUSERBTN, INC1BTN, INC2BTN, INC3BTN, INC4BTN, DEL1BTN, DEL2BTN, DEL3BTN, DEL4BTN;
-    private EditText editText; // Added line for name change
-    public int visC;
+    public int visC;// Variable to keep track of visibility change
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +23,11 @@ public class Profile_Page extends AppCompatActivity {
 
         int i=0;
         i++;
-
+        // Initialize visibility counter
         if (i == 0){
             visC = 0;
         }
-
+        // Initialize UI elements
         LOADUSERBTN = findViewById(R.id.loadUserBTN);
         INC1BTN = findViewById(R.id.inc1BTN);
         INC2BTN = findViewById(R.id.inc2BTN);
@@ -39,9 +38,9 @@ public class Profile_Page extends AppCompatActivity {
         DEL3BTN = findViewById(R.id.del3BTN);
         DEL4BTN = findViewById(R.id.del4BTN);
 
-//        editText = findViewById(R.id.test); // Added line for name change
 
-        INC1BTN.setVisibility(View.INVISIBLE);           // starts the incidents button as hidden
+        // Set incidents buttons initially invisible
+        INC1BTN.setVisibility(View.INVISIBLE);
         INC2BTN.setVisibility(View.INVISIBLE);
         INC3BTN.setVisibility(View.INVISIBLE);
         INC4BTN.setVisibility(View.INVISIBLE);
@@ -50,14 +49,16 @@ public class Profile_Page extends AppCompatActivity {
         DEL3BTN.setVisibility(View.INVISIBLE);
         DEL4BTN.setVisibility(View.INVISIBLE);
 
-
+        // Load user button click listener
         LOADUSERBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Increment visibility counter
                 visC++;
+                // Start MainActivity
                 Intent intent = new Intent(Profile_Page.this, MainActivity.class);
                 startActivity(intent);
-
+                // Show the next available incident button
                 if (!INC1BTN.isShown()) {
                     INC1BTN.setVisibility(View.VISIBLE);
                     DEL1BTN.setVisibility(View.VISIBLE);
@@ -72,11 +73,10 @@ public class Profile_Page extends AppCompatActivity {
                     DEL4BTN.setVisibility(View.VISIBLE);
                 }
 
-                //    v.setVisibility(View.INVISIBLE);
-
             }
         });
 
+        // Incident 1 button click listener
         INC1BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,6 +85,7 @@ public class Profile_Page extends AppCompatActivity {
             }
         });
 
+        // Delete 1 button click listener
         DEL1BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +95,7 @@ public class Profile_Page extends AppCompatActivity {
             }
         });
 
+        // Incident 2 button click listener
         INC2BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,6 +104,7 @@ public class Profile_Page extends AppCompatActivity {
             }
         });
 
+        // Delete 2 button click listener
         DEL2BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,6 +114,7 @@ public class Profile_Page extends AppCompatActivity {
             }
         });
 
+        // Incident 3 button click listener
         INC3BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,6 +123,7 @@ public class Profile_Page extends AppCompatActivity {
             }
         });
 
+        // Delete 3 button click listener
         DEL3BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,6 +133,7 @@ public class Profile_Page extends AppCompatActivity {
             }
         });
 
+        // Incident 4 button click listener
         INC4BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,6 +142,7 @@ public class Profile_Page extends AppCompatActivity {
             }
         });
 
+        // Delete 4 button click listener
         DEL4BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,27 +152,7 @@ public class Profile_Page extends AppCompatActivity {
             }
         });
 
-        // Added block for name change - Start
-//        editText.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//                // This method is called before the text is changed
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                // This method is called when the text is being changed
-//                String enteredText = s.toString();
-//                // Modify the button's text based on the entered text
-//                INC1BTN.setText(enteredText);
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                // This method is called after the text has changed
-//            }
-//        });
-        // Added block - End
+
 
     }
 

@@ -1,21 +1,13 @@
 package com.example.yusefcapstione;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.FileProvider;
-
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
@@ -25,31 +17,18 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Environment;
 import android.provider.MediaStore;
-import android.provider.Settings;
 import android.util.Log;
-import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
-import java.util.Random;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
 public class HeartRate_Activity extends AppCompatActivity {
 
@@ -106,15 +85,6 @@ public class HeartRate_Activity extends AppCompatActivity {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
-
-
-
-
-
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -218,29 +188,6 @@ public class HeartRate_Activity extends AppCompatActivity {
     }
 
 
-
-/*
-
-    private void exportDB() {
-        File file = new File("/storage/self/primary/Download/covid_sym_db.csv");
-
-        try {
-            CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
-            SQLiteDatabase db = database.getReadableDatabase();
-            Cursor curCSV = db.rawQuery("SELECT * FROM SymptomsTable", null);
-            csvWrite.writeNext(curCSV.getColumnNames());
-            while (curCSV.moveToNext()) {
-                String arrStr[] = {curCSV.getString(0), curCSV.getString(1), curCSV.getString(2), curCSV.getString(3), curCSV.getString(4), curCSV.getString(5), curCSV.getString(6), curCSV.getString(7), curCSV.getString(8), curCSV.getString(9), curCSV.getString(10), curCSV.getString(11), curCSV.getString(12), curCSV.getString(13)};
-                csvWrite.writeNext(arrStr);
-            }
-            csvWrite.close();
-            curCSV.close();
-        } catch (Exception sqlEx) {
-            Log.e("MainActivity", sqlEx.getMessage(), sqlEx);
-        }
-    }
-*/
-
     private boolean isCameraPermitted() {
         if (getPackageManager().hasSystemFeature(
                 PackageManager.FEATURE_CAMERA_ANY)) {
@@ -272,11 +219,6 @@ public class HeartRate_Activity extends AppCompatActivity {
             }
             symptoms.put("Heart Rate", String.valueOf(heartRate));
             symptoms.put("Resp Rate", respiratoryRate);
-            /*
-           /* if (database.updateDbWithSymptoms(symptoms)) {
-                //exportDB();
-                Toast.makeText(this, "DB updated", Toast.LENGTH_LONG).show();
-            } */
 
 
 
@@ -306,17 +248,6 @@ public class HeartRate_Activity extends AppCompatActivity {
         return max * 30 / total_time;
 
     }
-    /*
-   /* public void openRecordSymptoms() {
-        boolean result = database.insertHeartRate(String.valueOf(heartRate), respiratoryRate);
-
-        if (result) {
-            Toast.makeText(this, "Heart rate and respiratory rate inserted successfully", Toast.LENGTH_LONG);
-        }
-
-        Intent intent = new Intent(this, GraphMain.class);
-        startActivity(intent);
-    }*/
 
     private void measureHeartRate() {
         Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);

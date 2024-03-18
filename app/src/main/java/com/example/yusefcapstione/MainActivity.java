@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
+    // Declare UI elements
     private Button HRBTN, BRBTN, GRAPHBTN, SETTINGSBTN, CAMERABTN, backbutton, GRAPH2BTN;
 
     @Override
@@ -14,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialize UI elements
         HRBTN = findViewById(R.id.hrBTN);
         BRBTN = findViewById(R.id.brBTN);
         GRAPHBTN = findViewById(R.id.GraphBTN);
@@ -22,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
         CAMERABTN = findViewById(R.id.CameraBTN);
         backbutton = findViewById(R.id.backBTN);
 
+        // Set click listeners for buttons
+
+        // Heart Rate button
         HRBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -30,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Breath Rate button
         BRBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Graph button
         GRAPHBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Second Graph button
         GRAPH2BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Settings button
         SETTINGSBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Camera button
         CAMERABTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,8 +80,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
+        // Back button
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,6 +88,5 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 }
