@@ -1,22 +1,25 @@
 package com.example.yusefcapstione;
-import android.annotation.SuppressLint;
+
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
+
 import androidx.appcompat.app.AppCompatActivity;
-import com.bumptech.glide.Glide;
-import java.io.File;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.Collections;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CameraRoll_Activity extends AppCompatActivity {
 
     private Button backButton;
-    private ImageView imageView;
+    private RecyclerView recyclerView;
+    private PhotoPagerAdapter adapter;
     private List<String> photoPaths = new ArrayList<>();
     private CameraHelper cameraHelper; // Instance of CameraHelper
 
@@ -26,53 +29,40 @@ public class CameraRoll_Activity extends AppCompatActivity {
         setContentView(R.layout.cameraroll_settings);
 
         backButton = findViewById(R.id.backBTN);
-        imageView = findViewById(R.id.imageView);
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this)); // Use LinearLayoutManager for single-column layout
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CameraRoll_Activity.this, MainActivity.class);
-                startActivity(intent);
+                onBackPressed(); // Navigate back to the previous activity
             }
         });
 
         cameraHelper = new CameraHelper(this); // Initialize CameraHelper
 
-        // Retrieve photo paths from the database
-        retrievePhotoPathsFromDatabase();
-
-        // Display the first photo
-        displayNextPhoto();
-    }
-
-    private void retrievePhotoPathsFromDatabase() {
-        SQLiteDatabase db = cameraHelper.getReadableDatabase();
-        String[] projection = {CameraHelper.COLUMN_FILE_PATH};
-        Cursor cursor = db.query(CameraHelper.TABLE_NAME, projection, null, null, null, null, null);
-        if (cursor != null && cursor.moveToFirst()) {
-            do {
-                @SuppressLint("Range") String photoPath = cursor.getString(cursor.getColumnIndex(CameraHelper.COLUMN_FILE_PATH));
-                photoPaths.add(photoPath);
-            } while (cursor.moveToNext());
-            cursor.close();
-        }
-        db.close();
-    }
-
-    private void displayNextPhoto() {
-        if (!photoPaths.isEmpty()) {
-            String photoPath = photoPaths.remove(0); // Remove the first photo path from the list
-            File photoFile = new File(photoPath);
-            Glide.with(this).load(photoFile).into(imageView); // Load the photo into the imageView
-        } else {
-            // Handle case where there are no more photos to display
-            // For example, you can show a message or hide the imageView
-        }
+        // Create and set up the adapter
+        adapter = new PhotoPagerAdapter(this, photoPaths);
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
+    protected void onResume() {
+        super.onResume();
+        // Refresh photo paths from the database
+        retrievePhotoPathsFromDatabase();
     }
+
+    private void retrievePhotoPathsFromDatabase() {
+        photoPaths.clear(); // Clear existing list before refreshing
+        List<String> allPhotoPaths = cameraHelper.getAllPhotoPaths(); // Get all photo paths from the database
+
+        // Reverse the list to display the most recent photos first
+        Collections.reverse(allPhotoPaths);
+
+        photoPaths.addAll(allPhotoPaths); // Add photo paths to the list
+        Log.d("PhotoPaths", "Retrieved from database: " + photoPaths.toString()); // Log retrieved photo paths
+        adapter.notifyDataSetChanged(); // Notify adapter that the dataset has changed
+    }
+
 }

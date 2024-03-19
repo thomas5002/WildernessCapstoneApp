@@ -2,11 +2,10 @@ package com.example.yusefcapstione;
 
 import android.os.Bundle;
 import android.util.Log;
-
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
+import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +16,6 @@ import androidx.camera.core.ImageCaptureException;
 import androidx.camera.core.Preview;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
-
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 
@@ -27,13 +25,13 @@ import java.io.File;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-
 public class Camera_Activity extends AppCompatActivity {
 
     private PreviewView cameraView;
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     private Executor executor = Executors.newSingleThreadExecutor();
     private CameraHelper cameraHelper; // Instance of CameraHelper
+    private PhotoPagerAdapter adapter; // Declare adapter variable
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +59,10 @@ public class Camera_Activity extends AppCompatActivity {
                 onBackPressed(); // Navigate back to the previous activity
             }
         });
+
+        // Initialize adapter
+        adapter = new PhotoPagerAdapter(this, new ArrayList<>());
+
     }
 
     private void bindCameraUseCases(ProcessCameraProvider cameraProvider) {
@@ -91,7 +93,10 @@ public class Camera_Activity extends AppCompatActivity {
                 // Save image data into the database
                 saveImageData(photoFile.getAbsolutePath());
 
-                runOnUiThread(() -> Toast.makeText(Camera_Activity.this, "Photo saved", Toast.LENGTH_SHORT).show());
+                runOnUiThread(() -> {
+                    Toast.makeText(Camera_Activity.this, "Photo saved", Toast.LENGTH_SHORT).show();
+                    adapter.addPhoto(photoFile.getAbsolutePath()); // Update adapter with new photo
+                });
             }
 
             @Override

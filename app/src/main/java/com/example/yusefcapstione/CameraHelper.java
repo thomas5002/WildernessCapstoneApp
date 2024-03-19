@@ -4,20 +4,16 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
+import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CameraHelper extends SQLiteOpenHelper {
-    // Define your database name and version
-    private static final String DATABASE_NAME = "your_database_name.db";
+    private static final String DATABASE_NAME = "photos_database.db";
     private static final int DATABASE_VERSION = 1;
-
-    // Define your table name and column name
     public static final String TABLE_NAME = "photos";
     public static final String COLUMN_FILE_PATH = "file_path";
 
-    // Define the SQL statement to create the table
     private static final String SQL_CREATE_TABLE =
             "CREATE TABLE " + TABLE_NAME + " (" +
                     COLUMN_FILE_PATH + " TEXT)";
@@ -28,7 +24,6 @@ public class CameraHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Create the database table
         db.execSQL(SQL_CREATE_TABLE);
     }
 
@@ -37,32 +32,29 @@ public class CameraHelper extends SQLiteOpenHelper {
         // Handle upgrades if your schema changes in the future
     }
 
-    // Method to insert image data into the database
     public void insertImageData(String filePath) {
         SQLiteDatabase db = getWritableDatabase();
-
         ContentValues values = new ContentValues();
         values.put(COLUMN_FILE_PATH, filePath);
-
         db.insert(TABLE_NAME, null, values);
-
         db.close();
     }
 
-    // Method to retrieve all photo paths from the database
     public List<String> getAllPhotoPaths() {
         List<String> photoPaths = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(TABLE_NAME, new String[]{COLUMN_FILE_PATH}, null, null, null, null, null);
-        if (cursor != null && cursor.moveToFirst()) {
-            do {
-                String photoPath = cursor.getString(cursor.getColumnIndex(COLUMN_FILE_PATH));
+        String[] projection = {COLUMN_FILE_PATH};
+        Cursor cursor = db.query(true, TABLE_NAME, projection, null, null, COLUMN_FILE_PATH, null, null, null);
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                String photoPath = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_FILE_PATH));
                 photoPaths.add(photoPath);
-            } while (cursor.moveToNext());
+            }
             cursor.close();
+        } else {
+            Log.e("CameraHelper", "Cursor is null");
         }
         db.close();
         return photoPaths;
     }
 }
-
