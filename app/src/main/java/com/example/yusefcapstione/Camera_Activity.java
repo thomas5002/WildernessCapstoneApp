@@ -1,11 +1,11 @@
 package com.example.yusefcapstione;
 
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,7 +31,6 @@ public class Camera_Activity extends AppCompatActivity {
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     private Executor executor = Executors.newSingleThreadExecutor();
     private CameraHelper cameraHelper; // Instance of CameraHelper
-    private PhotoPagerAdapter adapter; // Declare adapter variable
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,18 +50,13 @@ public class Camera_Activity extends AppCompatActivity {
             }
         }, ContextCompat.getMainExecutor(this));
 
-        // Set OnClickListener for the back button
         Button backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed(); // Navigate back to the previous activity
+                onBackPressed();
             }
         });
-
-        // Initialize adapter
-        adapter = new PhotoPagerAdapter(this, new ArrayList<>());
-
     }
 
     private void bindCameraUseCases(ProcessCameraProvider cameraProvider) {
@@ -82,7 +76,9 @@ public class Camera_Activity extends AppCompatActivity {
     }
 
     private void takePhoto(ImageCapture imageCapture) {
-        File photoFile = new File(getExternalMediaDirs()[0], "photo.jpg");
+        // Generate a unique file name
+        String fileName = "photo_" + System.currentTimeMillis() + ".jpg";
+        File photoFile = new File(getExternalMediaDirs()[0], fileName);
 
         ImageCapture.OutputFileOptions outputFileOptions =
                 new ImageCapture.OutputFileOptions.Builder(photoFile).build();
@@ -90,13 +86,8 @@ public class Camera_Activity extends AppCompatActivity {
         imageCapture.takePicture(outputFileOptions, executor, new ImageCapture.OnImageSavedCallback() {
             @Override
             public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
-                // Save image data into the database
                 saveImageData(photoFile.getAbsolutePath());
-
-                runOnUiThread(() -> {
-                    Toast.makeText(Camera_Activity.this, "Photo saved", Toast.LENGTH_SHORT).show();
-                    adapter.addPhoto(photoFile.getAbsolutePath()); // Update adapter with new photo
-                });
+                runOnUiThread(() -> Toast.makeText(Camera_Activity.this, "Photo saved", Toast.LENGTH_SHORT).show());
             }
 
             @Override
@@ -106,7 +97,6 @@ public class Camera_Activity extends AppCompatActivity {
         });
     }
 
-    // Method to save image data into the database
     private void saveImageData(String filePath) {
         cameraHelper.insertImageData(filePath);
     }
