@@ -28,7 +28,7 @@ public class GraphMain2 extends AppCompatActivity {
     LineGraphSeries<DataPoint> series2;
     MyHelper2 myHelper2;
     SQLiteDatabase sqLiteDatabase2;
-
+//gay guy yusef
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
