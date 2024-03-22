@@ -1,5 +1,6 @@
 package com.example.yusefcapstione;
 
+import android.database.Cursor;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.content.ContentValues;
 import android.content.Context;
@@ -34,13 +35,23 @@ public class MyHelper2 extends SQLiteOpenHelper {
     }
 
     // Method to insert data into the database
-    public void insertData(int x2, int y2) {
+    public void insertData(double x2, int y2) {
         // Get a writable database
         SQLiteDatabase db2 = this.getWritableDatabase();
+
+        Cursor cursor = db2.rawQuery("SELECT MAX(xValues2) FROM MyTable2", null);
+        int nextXValue = 0;
+        if (cursor.moveToFirst()) {
+            nextXValue = cursor.getInt(0) + 1;
+        }
+        cursor.close();
+
+        nextXValue = nextXValue % 100;
+
         // Create a ContentValues object to store the data
         ContentValues contentValues2 = new ContentValues();
         // Put data into ContentValues object
-        contentValues2.put("xValues2", x2);
+        contentValues2.put("xValues2", nextXValue);
         contentValues2.put("yValues2", y2);
         // Insert data into the table
         db2.insert("MyTable2", null, contentValues2);

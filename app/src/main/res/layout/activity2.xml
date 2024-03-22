@@ -12,17 +12,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="400dp"
+        android:layout_marginBottom="14dp"
         android:background="@color/blue"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toTopOf="@+id/inputTextX"
+        app:layout_constraintBottom_toTopOf="@+id/backBTN"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.997"
-        app:layout_constraintStart_toEndOf="@+id/inputTextY"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         app:title="Breathing Rate Graph"
         app:titleTextColor="@color/white"
         tools:ignore="MissingConstraints" />
@@ -31,52 +28,50 @@
         android:id="@+id/backBTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="14dp"
         android:backgroundTint="@color/blue"
         android:text="BackButton"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/graph2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.945"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.102" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
 
     <Button
         android:id="@+id/insertBTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="45dp"
         android:backgroundTint="@color/blue"
         android:text="INSERT"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.871" />
+        app:layout_constraintBottom_toTopOf="@+id/clrBTN"
+        app:layout_constraintStart_toEndOf="@+id/clrBTN"
+        app:layout_constraintTop_toBottomOf="@+id/inputTextX" />
 
     <com.jjoe64.graphview.GraphView
         android:id="@+id/graph2"
-        android:layout_width="411dp"
-        android:layout_height="297dp"
-        android:layout_marginTop="132dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="27dp"
+        app:layout_constraintBottom_toTopOf="@+id/inputTextX"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/backBTN" />
 
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputTextX"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="115dp"
+        android:layout_height="66dp"
         android:layout_marginStart="43dp"
         android:layout_marginEnd="53dp"
-        android:layout_marginBottom="214dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="34dp"
+        app:layout_constraintBottom_toTopOf="@+id/insertBTN"
         app:layout_constraintEnd_toStartOf="@+id/inputTextY"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar3">
+        app:layout_constraintTop_toBottomOf="@+id/graph2">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textInputEditText"
@@ -89,7 +84,7 @@
         android:id="@+id/inputTextY"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="26dp"
+        android:layout_marginEnd="25dp"
         app:layout_constraintBottom_toBottomOf="@+id/inputTextX"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/inputTextX"
@@ -101,6 +96,17 @@
             android:layout_height="48dp"
             android:hint="BPM" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/clrBTN"
+        android:layout_width="105dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="69dp"
+        android:layout_marginBottom="35dp"
+        android:text="Clear Graph"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/insertBTN" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

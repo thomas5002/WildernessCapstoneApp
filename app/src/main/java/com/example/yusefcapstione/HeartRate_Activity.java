@@ -3,12 +3,15 @@ package com.example.yusefcapstione;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.hardware.camera2.CameraAccessException;
+import android.hardware.camera2.CameraManager;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.media.ThumbnailUtils;
@@ -29,6 +32,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+import android.hardware.Camera;
 
 public class HeartRate_Activity extends AppCompatActivity {
 
@@ -37,6 +41,7 @@ public class HeartRate_Activity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        turnOffFlash();
         if (countDownTimer != null) {
             countDownTimer.cancel();
         }
@@ -45,6 +50,7 @@ public class HeartRate_Activity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        turnOffFlash();
         if (countDownTimer != null) {
             countDownTimer.cancel();
         }
@@ -53,8 +59,10 @@ public class HeartRate_Activity extends AppCompatActivity {
     private Button button;
 
 
-
-
+    private CameraManager cameraManager;
+    private String cameraId;
+    private Camera camera;
+    private Camera.Parameters params;
 
 
     private static final int VIDEO_CAPTURE = 101;
@@ -86,6 +94,27 @@ public class HeartRate_Activity extends AppCompatActivity {
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
 
+    /*private void turnOnFlash() {
+        if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
+            camera = Camera.open();
+            params = camera.getParameters();
+            params.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+            camera.setParameters(params);
+            camera.startPreview();
+        }
+    }
+
+    private void turnOffFlash() {
+        if (camera != null) {
+            params = camera.getParameters();
+            params.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+            camera.setParameters(params);
+            camera.stopPreview();
+            camera.release();
+            camera = null;
+        }
+    }
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,6 +127,13 @@ public class HeartRate_Activity extends AppCompatActivity {
         timerTextView = (TextView) findViewById(R.id.timerTextView);
         logger = (TextView) findViewById(R.id.heartRateInstruction);
        // database = new Database(this);
+
+        cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
+        try {
+            cameraId = cameraManager.getCameraIdList()[0]; // Get the ID of the rear camera
+        } catch (CameraAccessException e) {
+            e.printStackTrace();
+        }
 
         // New code for back button, needs to be within the onCreate function
         // initialization and click listener, similar to other buttons
@@ -124,6 +160,7 @@ public class HeartRate_Activity extends AppCompatActivity {
         measureHeartRateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //turnOnFlash();
                 measureHeartRate();
             }
         });
@@ -197,6 +234,22 @@ public class HeartRate_Activity extends AppCompatActivity {
         }
     }
 
+    private void turnOnFlash() {
+        try {
+            cameraManager.setTorchMode(cameraId, true); // Turn on the flash
+        } catch (CameraAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void turnOffFlash() {
+        try {
+            cameraManager.setTorchMode(cameraId, false); // Turn off the flash
+        } catch (CameraAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
     void configurePermissions() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -250,10 +303,12 @@ public class HeartRate_Activity extends AppCompatActivity {
     }
 
     private void measureHeartRate() {
+        //turnOnFlash();
         Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 45);
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         startActivityForResult(intent, VIDEO_CAPTURE);
+
 
     }
 
@@ -270,6 +325,18 @@ public class HeartRate_Activity extends AppCompatActivity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
+
+        if (requestCode == VIDEO_CAPTURE) {
+            if (resultCode == RESULT_OK) {
+                // Handle the video capture result
+            } else if (resultCode == RESULT_CANCELED) {
+                // User cancelled the video capture
+            } else {
+                // Video capture failed
+            }
+
+            turnOffFlash(); // Turn off the flash when video capture is complete or cancelled
+        }
 
         if (resultCode != RESULT_OK) return;
 
@@ -292,7 +359,7 @@ public class HeartRate_Activity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-
+            turnOffFlash(); // Turn off the flash
             logger.setText(heartRate + " bpm");
         }
 

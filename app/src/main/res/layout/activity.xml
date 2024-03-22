@@ -66,6 +66,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+    <Button
+        android:id="@+id/clrBTN"
+        android:layout_width="105dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="35dp"
+        android:text="Clear Graph"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/insertBTN"
+        app:layout_constraintVertical_bias="0.47" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputTextX"
         android:layout_width="0dp"
