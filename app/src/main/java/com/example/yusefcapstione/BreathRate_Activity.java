@@ -49,8 +49,6 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
         return true;
     }
 
-
-        private double heartRate = 0;
         private String respiratoryRate = "0";
         private HashMap<String, String> symptoms = new HashMap<String, String>();
         private int buttonPressCount = 0;
@@ -69,9 +67,6 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
         int total_time = 0;
         int x;
         int index = 0;
-       // private DatabaseTest database;
-
-        //Database database;
 
 
         @Override
@@ -86,7 +81,7 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
             Button respiratoryRateButton = findViewById(R.id.manBTN);
             timerTextView = (TextView) findViewById(R.id.timerTextView);
 
-            // New code for back button initialization and click listener
+            // Code for back button initialization and click listener
             button = findViewById(R.id.backBTN);
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -95,10 +90,7 @@ public class BreathRate_Activity extends AppCompatActivity implements SensorEven
                     startActivity(intent);
                 }
             });
-            // End of new code for back button
-
-
-
+            // End of code for back button
 
 
 

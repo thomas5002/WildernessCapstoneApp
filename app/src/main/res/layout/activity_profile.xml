@@ -34,21 +34,6 @@
         app:title="  Wilderness Safety"
         app:titleTextColor="@color/white" />
 
-    <!-- EditText for entering the name -->
-    <!-- End of that added code -->
-
-
-    <!--    <EditText-->
-    <!--        android:id="@+id/test"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="232dp"-->
-    <!--        android:hint="TESTING"-->
-    <!--        android:textSize="60sp"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.5"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@id/toolbar5" />-->
 
     <Button
         android:id="@+id/inc1BTN"
@@ -175,7 +160,7 @@
         app:layout_constraintTop_toTopOf="@+id/inc4BTN"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintVertical_bias="1.0" />
-    <!-- app:layout_constraintBottom_toTopOf="@id/inc4BTN" -->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

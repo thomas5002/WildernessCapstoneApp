@@ -83,38 +83,14 @@ public class HeartRate_Activity extends AppCompatActivity {
     float accelValuesX[] = new float[MAX_COUNT];
     float accelValuesY[] = new float[MAX_COUNT];
     float accelValuesZ[] = new float[MAX_COUNT];
-    long time1;
-    long time2;
     int total_time = 0;
-    int index = 0;
     TextView logger;
-   //DatabaseTest database;
+
     private  String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
 
-    /*private void turnOnFlash() {
-        if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
-            camera = Camera.open();
-            params = camera.getParameters();
-            params.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-            camera.setParameters(params);
-            camera.startPreview();
-        }
-    }
-
-    private void turnOffFlash() {
-        if (camera != null) {
-            params = camera.getParameters();
-            params.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-            camera.setParameters(params);
-            camera.stopPreview();
-            camera.release();
-            camera = null;
-        }
-    }
-*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,7 +102,7 @@ public class HeartRate_Activity extends AppCompatActivity {
         Button respiratoryRateButton = findViewById(R.id.manBTN);
         timerTextView = (TextView) findViewById(R.id.timerTextView);
         logger = (TextView) findViewById(R.id.heartRateInstruction);
-       // database = new Database(this);
+
 
         cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
         try {
@@ -136,7 +112,7 @@ public class HeartRate_Activity extends AppCompatActivity {
         }
 
         // New code for back button, needs to be within the onCreate function
-        // initialization and click listener, similar to other buttons
+        // Initialization and click listener, similar to other buttons
         button = findViewById(R.id.backBTN);
 
         button.setOnClickListener(new View.OnClickListener() {

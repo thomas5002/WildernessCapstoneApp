@@ -18,8 +18,6 @@ import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 public class GraphMain2 extends AppCompatActivity {
@@ -62,7 +60,6 @@ public class GraphMain2 extends AppCompatActivity {
             double currentTimeMinutes = System.currentTimeMillis() / 60000.0;
 
             // Adjusted x-value using the app's start time as the baseline
-            //int adjustedXValue = (int) (currentTimeMinutes - appStartTime);
 
             // Insert data into the database
             myHelper2.insertData(currentTimeMinutes, respiratoryRate);

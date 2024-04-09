@@ -60,7 +60,6 @@ public class GraphMain extends AppCompatActivity {
             double currentTimeMinutes = System.currentTimeMillis() / 60000.0;
 
             // Adjusted x-value using the app's start time as the baseline
-            //int adjustedXValue = (int) (currentTimeMinutes - appStartTime);
 
             // Insert data into the database
             myHelper.insertData(currentTimeMinutes, (int) heartRate);
